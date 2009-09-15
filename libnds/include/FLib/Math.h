@@ -45,58 +45,58 @@ const s16 F_SineTable[512] = {
 	0xFFCE,0xFFD1,0xFFD4,0xFFD7,0xFFDA,0xFFDE,0xFFE1,0xFFE4,	0xFFE7,0xFFEA,0xFFED,0xFFF0,0xFFF3,0xFFF7,0xFFFA,0xFFFD
 };
 
-#define F_Sine(angle) F_SineTable[angle & 511]
-#define F_Cosine(angle) F_SineTable[(angle + 128) & 511]
+#define F_Sine(angle) F_SineTable[((angle))&511]
+#define F_Cosine(angle) F_SineTable[((angle) + 128)&511]
 
-u32 F_Distance(s16 x1, s16 y1, s16 x2, s16 y2)
+static inline u64 F_Distance(s32 x1, s32 y1, s32 x2, s32 y2)
 {
 	s64 h = x1 - x2;
 	s64 v = y1 - y2;
-	return h * h + v * v;
+	return(h*h + v*v);
 }
 
-u16 F_AdjustAngle(u16 angle, s16 anglerot, s16 x1, s16 y1, s16 x2, s16 y2)
+u16 F_AdjustAngle(u16 angle, s16 anglerot, s32 startx, s32 starty, s32 targetx, s32 targety)
 {
-	u32 distances[3];
-
-	x1 = x1 << 8;
-	y1 = y1 << 8;
-	x2 = x2 << 8;
-	y2 = y2 << 8;
+	u64 distances[3];
+	
+	startx = startx << 8;
+	starty = starty << 8;
+	targetx = targetx << 8;
+	targety = targety << 8;
 
 	u16 tempangle = (angle - anglerot) & 511;
 
-	distances[0] = F_Distance(x1 + F_Cosine(tempangle), y1 - F_Sine(tempangle), x2, y2);
+	distances[0] = F_Distance(startx + F_Cosine(tempangle), starty - F_Sine(tempangle), targetx, targety);
 	tempangle += anglerot;
 	tempangle &= 511;
-	distances[1] = F_Distance(x1 + F_Cosine(tempangle), y1 - F_Sine(tempangle), x2, y2);
+	distances[1] = F_Distance(startx + F_Cosine(tempangle), starty - F_Sine(tempangle), targetx, targety);
 	tempangle += anglerot;
 	tempangle &= 511;
-	distances[2] = F_Distance(x1 + F_Cosine(tempangle), y1 - F_Sine(tempangle), x2, y2);
+	distances[2] = F_Distance(startx + F_Cosine(tempangle), starty - F_Sine(tempangle), targetx, targety);
 
-	if (distances[0] < distances[1]) angle -= anglerot;
-	else if (distances[2] < distances[1]) angle += anglerot;
+	if (distances[0] < distances[1])  angle -= anglerot;
+	else if (distances[2] < distances[1])  angle += anglerot;
 
-	return (angle&511);    
+	return (angle&511);
 }
 
-u16 F_GetAngle(s16 x1, s16 y1, s16 x2, s16 y2)
+static inline u16 F_GetAngle(s32 startx, s32 starty, s32 targetx, s32 targety)
 {
 	u16 angle = 0;
 	u16 anglerot = 180;
 
-	while (anglerot > 5)
+	while(anglerot > 5)
 	{
-		angle = F_AdjustAngle(angle, anglerot, x1, y1, x2, y2);
+		angle = F_AdjustAngle(angle, anglerot, startx, starty, targetx, targety);
 		anglerot = (anglerot - ((3 * anglerot) >> 3));
 	}
 
 	anglerot = 4;
-	angle = F_AdjustAngle(angle, anglerot, x1, y1, x2, y2);
+	angle = F_AdjustAngle(angle, anglerot, startx, starty, targetx, targety);
 	anglerot = 2;
-	angle = F_AdjustAngle(angle, anglerot, x1, y1, x2, y2);
+	angle = F_AdjustAngle(angle, anglerot, startx, starty, targetx, targety);
 	anglerot = 1;
-	angle = F_AdjustAngle(angle, anglerot, x1, y1, x2, y2);
+	angle = F_AdjustAngle(angle, anglerot, startx, starty, targetx, targety);
 
 	return angle;
 }
