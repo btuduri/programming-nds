@@ -2,25 +2,14 @@
 #define _F_LIB_
 
 #include <nds.h>
-#include "3D.h"
-#include "Drawing.h"
-#include "Keys.h"
-#include "Math.h"
-#include "Sound.h"
-#include "Text.h"
+#include <maxmod9.h>
+#include <stdio.h>
 
-void F_Init()
-{
+#include "soundbank.h"
+#include "soundbank_bin.h"
 
-}
-
-void F_WaitVblank()
-{
-	glFlush(0);
-	bgUpdate();
-
-	F_UpdateKeys();
-	swiWaitForVBlank();
-}
+#include "FMain.h"
+#include "FMusic.h"
+#include "FSoundEffect.h"
 
 #endif
