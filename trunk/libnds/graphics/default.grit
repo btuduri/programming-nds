@@ -1,8 +1,5 @@
-# Bitmap type
--gb
-
-# Tileset type
-#-gt
-
-# Graphic bitdepth
+-m!
 -gB8
+#metatile
+-Mh4
+-Mw4
