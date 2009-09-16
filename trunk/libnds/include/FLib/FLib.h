@@ -11,5 +11,6 @@
 #include "FMain.h"
 #include "FMusic.h"
 #include "FSoundEffect.h"
+#include "FSprite.h"
 
 #endif
