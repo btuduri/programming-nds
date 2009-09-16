@@ -8,7 +8,6 @@ class F_Main
 public:
 	void Initialize()
 	{
-		consoleDemoInit();
 		mmInitDefaultMem((mm_addr)soundbank_bin);
 	}
 
