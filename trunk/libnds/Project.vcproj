@@ -89,6 +89,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\include\FLib\FBackground.h"
+					>
+				</File>
+				<File
 					RelativePath=".\include\FLib\FLib.h"
 					>
 				</File>
@@ -101,7 +105,15 @@
 					>
 				</File>
 				<File
+					RelativePath=".\include\FLib\FScene.h"
+					>
+				</File>
+				<File
 					RelativePath=".\include\FLib\FSoundEffect.h"
+					>
+				</File>
+				<File
+					RelativePath=".\include\FLib\FSprite.h"
 					>
 				</File>
 				<File
