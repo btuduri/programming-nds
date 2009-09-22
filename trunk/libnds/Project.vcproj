@@ -105,15 +105,15 @@
 					>
 				</File>
 				<File
-					RelativePath=".\include\FLib\FScene.h"
-					>
-				</File>
-				<File
 					RelativePath=".\include\FLib\FSoundEffect.h"
 					>
 				</File>
 				<File
 					RelativePath=".\include\FLib\FSprite.h"
+					>
+				</File>
+				<File
+					RelativePath=".\include\FLib\FStage.h"
 					>
 				</File>
 				<File
