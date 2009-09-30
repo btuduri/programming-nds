@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9.00"
+	Version="9,00"
 	Name="Project"
 	ProjectGUID="{3EB66A65-5BA7-4850-AA11-7439B0BA3E9B}"
 	RootNamespace="arm9"
@@ -29,8 +29,8 @@
 				ReBuildCommandLine="make clean&#x0D;&#x0A;make -r 2&gt;&amp;1 | sed -e &apos;s/\(.[a-zA-Z]\+\):\([0-9]\+\):/\1(\2):/&apos;"
 				CleanCommandLine="make clean"
 				Output="project_name.nds"
-				PreprocessorDefinitions="WIN32;_DEBUG"
-				IncludeSearchPath="C:\devkitPro\libnds\include"
+				PreprocessorDefinitions="ARM9"
+				IncludeSearchPath="C:\devkitPro\libnds\include;C:\devkitPro\libnds\include\nds\arm9;C:\devkitPro\libnds\include\nds;C:\devkitPro\libnds\include\sys"
 				ForcedIncludes=""
 				AssemblySearchPath=""
 				ForcedUsingAssemblies=""
@@ -105,15 +105,15 @@
 					>
 				</File>
 				<File
+					RelativePath=".\include\FLib\FScreen.h"
+					>
+				</File>
+				<File
 					RelativePath=".\include\FLib\FSoundEffect.h"
 					>
 				</File>
 				<File
 					RelativePath=".\include\FLib\FSprite.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\FLib\FStage.h"
 					>
 				</File>
 				<File
