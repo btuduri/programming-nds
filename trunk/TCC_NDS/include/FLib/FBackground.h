@@ -10,37 +10,62 @@ class F_Background
 
 	u16 *tilemap;
 	int map_base;
+	int ram_base;
 	int width, height;
-	bool half_screen_x;
-	bool half_screen_y;
-	
+
 	int x, y;
 	int limit_x, limit_y;
 	int screen_x, screen_y;
-	bool infinite_scroll_x, infinite_scroll_y;
+	bool alternate_x, alternate_y;
 
 public:
 	F_Background(u16 *tilemap, int width, int height)
 	{
-		this->tilemap = tilemap;
 		this->width = width;
 		this->height = height;
-		
-		map_base = 0;
-		half_screen_x = true;
-		half_screen_y = true;
+		this->tilemap = tilemap;
 
-		x = y = 0;
 		screen_x = screen_y = 0;
-		infinite_scroll_x = infinite_scroll_y = false;
 		limit_x = width * 256 - 256;
-		limit_y = height * 256 - 256;
+		limit_y = height * 256 - 256 + 64;
+		alternate_x = alternate_y = false;
 	}
 
-	void Load(int layer)
+	void Load(int layer, int init_x, int init_y)
 	{
+		// Inicializa variáveis
+		// --------------------
+		ram_base = layer * 4;
 		this->layer = layer;
 
+		x = init_x;
+		y = init_y;
+		screen_x = x % 256;
+		screen_y = y % 256;
+
+		// Ajusta tela no limite
+		// ---------------------
+		bool adjust_x = false;
+
+		if (width == 1 || x < 0)
+			x = screen_x = 0;
+		else if (x > limit_x)
+		{
+			x = limit_x;
+			screen_x = 256;
+			adjust_x = true;
+		}
+
+		if (y < 0)
+			y = screen_y = 0;
+		else if (y > limit_y)
+		{
+			y = limit_y;
+			screen_y = 64;
+		}
+				
+		// Inicializa background
+		// ---------------------
 		BgSize size;
 		if (width == 1)
 			if (height == 1)
@@ -53,215 +78,99 @@ public:
 			else
 				size = BgSize_T_512x512;
 
-		id = bgInit(layer, BgType_Text8bpp, size, layer * 4, 2);
+		id = bgInit(layer, BgType_Text8bpp, size, ram_base, 2);
 
-		// Teste
-		dmaCopy(&tilemap[Offset(map_base)], BG_MAP_RAM(layer*4), 2048);
-		dmaCopy(&tilemap[Offset(map_base+1)], BG_MAP_RAM(layer*4+1), 2048);
-		dmaCopy(&tilemap[Offset(map_base+width)], BG_MAP_RAM(layer*4+2), 2048);
-		dmaCopy(&tilemap[Offset(map_base+width+1)], BG_MAP_RAM(layer*4+3), 2048);
+		// Copia mapas de memória
+		// ----------------------
+		map_base = ((y / 256) * width) + (x / 256);
+		if (adjust_x) map_base--;
+
+		dmaCopy(&tilemap[Offset(map_base)], BG_MAP_RAM(ram_base), 2048);
+		dmaCopy(&tilemap[Offset(map_base + 1)], BG_MAP_RAM(ram_base + 1), 2048);
+		dmaCopy(&tilemap[Offset(map_base + width)], BG_MAP_RAM(ram_base + 2), 2048);
+		dmaCopy(&tilemap[Offset(map_base + width + 1)], BG_MAP_RAM(ram_base + 3), 2048);
+
+		bgSetScroll(id, screen_x, screen_y);
 	}
 
 	void Scroll(int offset_x, int offset_y)
 	{
-		ScrollX(offset_x);
-		ScrollY(offset_y);
-	}
-
-	void ScrollX(int offset_x)
-	{
 		// Incrementa coordenadas
+		// ----------------------
 		x += offset_x;
-		screen_x += offset_x;
-
-		// Ajusta tela no limite
-		if (!infinite_scroll_x)
-		{
-			if (x > limit_x)
-			{
-				x = limit_x;
-				if (screen_x > 512)
-					screen_x = 512;
-				else if (screen_x > 256)
-					screen_x = 256;
-			}
-			else if (x < 0)
-				x = screen_x = 0;
-		}
-
-		// Copia novos maps se necessário
-		if (screen_x > 512)
-		{
-			map_base++;
-			half_screen_x = true;
-			screen_x -= 512;
-			if (half_screen_y)
-			{
-				dmaCopy(&tilemap[Offset(map_base + 1)], BG_MAP_RAM(layer * 4 + 1), 2048);
-				if (height > 1)
-					dmaCopy(&tilemap[Offset(map_base + width + 1)], BG_MAP_RAM(layer * 4 + 3), 2048);
-			}
-			else
-			{
-				dmaCopy(&tilemap[Offset(map_base + width + 1)], BG_MAP_RAM(layer * 4 + 1), 2048);
-				if (height > 1)
-					dmaCopy(&tilemap[Offset(map_base + 1)], BG_MAP_RAM(layer * 4 + 3), 2048);
-			}
-		}
-		else if (screen_x > 256 && half_screen_x)
-		{
-			map_base++;
-			half_screen_x = false;
-			if (half_screen_y)
-			{
-				dmaCopy(&tilemap[Offset(map_base + 1)], BG_MAP_RAM(layer * 4), 2048);
-				if (height > 1)
-					dmaCopy(&tilemap[Offset(map_base + width + 1)], BG_MAP_RAM(layer * 4 + 2), 2048);
-			}
-			else
-			{
-				dmaCopy(&tilemap[Offset(map_base + width + 1)], BG_MAP_RAM(layer * 4), 2048);
-				if (height > 1)
-					dmaCopy(&tilemap[Offset(map_base + 1)], BG_MAP_RAM(layer * 4 + 2), 2048);
-			}
-		}
-		else if (screen_x < 0)
-		{
-			map_base--;
-			half_screen_x = false;
-			screen_x += 512;
-			if (half_screen_y)
-			{
-				dmaCopy(&tilemap[Offset(map_base)], BG_MAP_RAM(layer * 4 + 1), 2048);
-				if (height > 1)
-					dmaCopy(&tilemap[Offset(map_base + width)], BG_MAP_RAM(layer * 4 + 3), 2048);
-			}
-			else
-			{
-				dmaCopy(&tilemap[Offset(map_base + width)], BG_MAP_RAM(layer * 4 + 1), 2048);
-				if (height > 1)
-					dmaCopy(&tilemap[Offset(map_base)], BG_MAP_RAM(layer * 4 + 3), 2048);
-			}
-		}
-		else if (screen_x < 256 && !half_screen_x)
-		{
-			map_base--;
-			half_screen_x = true;
-			if (half_screen_y)
-			{
-				dmaCopy(&tilemap[Offset(map_base)], BG_MAP_RAM(layer * 4), 2048);
-				if (height > 1)
-					dmaCopy(&tilemap[Offset(map_base + width)], BG_MAP_RAM(layer * 4 + 2), 2048);
-			}
-			else
-			{
-				dmaCopy(&tilemap[Offset(map_base + width)], BG_MAP_RAM(layer * 4), 2048);
-				if (height > 1)
-					dmaCopy(&tilemap[Offset(map_base)], BG_MAP_RAM(layer * 4 + 2), 2048);
-			}
-		}
-
-		bgSetScroll(id, screen_x, screen_y);
-	}
-
-	void ScrollY(int offset_y)
-	{
-		// Incrementa coordenadas
 		y += offset_y;
+		screen_x += offset_x;		
 		screen_y += offset_y;
 
 		// Ajusta tela no limite
-		if (!infinite_scroll_y)
+		// ---------------------
+		if (x > limit_x)
 		{
-			if (y > limit_y)
-			{
-				y = limit_y;
-				if (screen_y > 512)
-					screen_y = 512;
-				else if (screen_y > 256)
-					screen_y = 256;
-			}
-			else if (y < 0)
-				y = screen_y = 0;
+			x = limit_x;
+			screen_x = 256;
 		}
+		else if (x < 0)
+			x = screen_x = 0;
 
-		// Copia novos maps se necessário
-		if (screen_y > 512)
+		if (y > limit_y)
 		{
-			map_base += width;
-			half_screen_y = true;
-			screen_y -= 512;
-			dmaCopy(&tilemap[Offset(map_base + width)], BG_MAP_RAM(layer * 4 + 2), 2048);
-			if (width > 1)
-				dmaCopy(&tilemap[Offset(map_base + width + 1)], BG_MAP_RAM(layer * 4 + 3), 2048);
+			y = limit_y;
+			screen_y = 64;
 		}
-		else if (screen_y > 256 && half_screen_y)
+		else if (y < 0)
+			y = screen_y = 0;
+		
+		// Copia mapas de memória
+		// ----------------------
+		if (screen_x > 256)
 		{
+			screen_x -= 256;
+			map_base++;
+			dmaCopy(&tilemap[Offset(map_base + (alternate_y * width) + 1)], BG_MAP_RAM(ram_base + alternate_x), 2048);
+			dmaCopy(&tilemap[Offset(map_base + (!alternate_y * width) + 1)], BG_MAP_RAM(ram_base + 2 + alternate_x), 2048);
+			alternate_x = !alternate_x;
+		}
+		else if (screen_x < 0)
+		{
+			screen_x += 256;
+			map_base--;
+			alternate_x = !alternate_x;
+			dmaCopy(&tilemap[Offset(map_base + (alternate_y * width))], BG_MAP_RAM(ram_base + alternate_x), 2048);
+			dmaCopy(&tilemap[Offset(map_base + (!alternate_y * width))], BG_MAP_RAM(ram_base + 2 + alternate_x), 2048);
+		}
+		
+		if (screen_y > 256)
+		{
+			screen_y -= 256;
 			map_base += width;
-			half_screen_y = false;
-			if (half_screen_x)
-			{
-				dmaCopy(&tilemap[Offset(map_base + width)], BG_MAP_RAM(layer * 4), 2048);
-				if (width > 1)
-					dmaCopy(&tilemap[Offset(map_base + width + 1)], BG_MAP_RAM(layer * 4 + 1), 2048);
-			}
-			else
-			{
-				dmaCopy(&tilemap[Offset(map_base + width + 1)], BG_MAP_RAM(layer * 4), 2048);
-				if (width > 1)
-					dmaCopy(&tilemap[Offset(map_base + width)], BG_MAP_RAM(layer * 4 + 1), 2048);
-			}
+			dmaCopy(&tilemap[Offset(map_base + width + alternate_x)], BG_MAP_RAM(ram_base + (2 * alternate_y)), 2048);
+			dmaCopy(&tilemap[Offset(map_base + width + !alternate_x)], BG_MAP_RAM(ram_base + (2 * alternate_y) + 1), 2048);
+			alternate_y = !alternate_y;
 		}
 		else if (screen_y < 0)
 		{
+			screen_y += 256;
 			map_base -= width;
-			half_screen_y = false;
-			screen_y += 512;
-			if (half_screen_x)
-			{
-				dmaCopy(&tilemap[Offset(map_base)], BG_MAP_RAM(layer * 4 + 2), 2048);
-				if (width > 1)
-					dmaCopy(&tilemap[Offset(map_base + 1)], BG_MAP_RAM(layer * 4 + 3), 2048);
-			}
-			else
-			{
-				dmaCopy(&tilemap[Offset(map_base + 1)], BG_MAP_RAM(layer * 4 + 2), 2048);
-				if (width > 1)
-					dmaCopy(&tilemap[Offset(map_base)], BG_MAP_RAM(layer * 4 + 3), 2048);
-			}
-		}
-		else if (screen_y < 256 && !half_screen_y)
-		{
-			map_base -= width;
-			half_screen_y = true;
-			if (half_screen_x)
-			{
-				dmaCopy(&tilemap[Offset(map_base)], BG_MAP_RAM(layer * 4), 2048);
-				if (width > 1)
-					dmaCopy(&tilemap[Offset(map_base + 1)], BG_MAP_RAM(layer * 4 + 1), 2048);
-			}
-			else
-			{
-				dmaCopy(&tilemap[Offset(map_base + 1)], BG_MAP_RAM(layer * 4), 2048);
-				if (width > 1)
-					dmaCopy(&tilemap[Offset(map_base)], BG_MAP_RAM(layer * 4 + 1), 2048);
-			}
+			alternate_y = !alternate_y;
+			dmaCopy(&tilemap[Offset(map_base + alternate_x)], BG_MAP_RAM(ram_base + (2 * alternate_y)), 2048);
+			dmaCopy(&tilemap[Offset(map_base + !alternate_x)], BG_MAP_RAM(ram_base + (2 * alternate_y) + 1), 2048);
 		}
 
+		// Efetua o scroll
+		// ---------------
+		bgSetScroll(id, (alternate_x * 256) + screen_x, (alternate_y * 256) + screen_y);
+	}
+
+	void InfiniteScroll(int offset_x, int offset_y)
+	{
+		screen_x += offset_x;
+		screen_y += offset_y;
 		bgSetScroll(id, screen_x, screen_y);
 	}
 
-	void SetInfiniteScroll(bool infinite_scroll_x, bool infinite_scroll_y)
-	{
-		this->infinite_scroll_x = infinite_scroll_x;
-		this->infinite_scroll_y = infinite_scroll_y;
-	}
-
 private:
-	int Offset(int i)
-	{
-		return i * 1024;
-	}
+	int Offset(int i) { return i * 1024; }
+
 };
 
 #endif

@@ -7,45 +7,60 @@
 #define ANIM_UPDOWN 1
 #define ANIM_ONESHOT ANIM_LOOP, 1
 #define ANIM_INFINITE ANIM_LOOP, -1
-#define MAX_SPRITE 128
-#define NO_SPRITE -1
 
+/*
+	Sprites 32x32 256 cores
+*/
 class F_Sprite
 {
-	int id;
+	u8* gfx;
 	int framesCount;
 	u16** frames;
-	
+
 	int currentFrame;
 	int animationFrame;
 	int framesPerAnimation;
 
-	static bool allocSprite[MAX_SPRITE];
+	SpriteEntry *se;
 
 public:
-	int x, y;
 
 	F_Sprite(u8* gfx, int framesCount)
 	{
-		//oam = main ? &oamMain : &oamSub;
-		//id = main ? spriteIdMain++ : spriteIdSub++;
-
+		this->gfx = gfx;
 		this->framesCount = framesCount;
+		currentFrame = 0;
+	}
+
+	void Load(bool main, int id)
+	{
+		// Inicializa Sprite
+		OamState *oam = main ? &oamMain : &oamSub;
+		se = &(oam->oamMemory[id]);
+
+		// Carrega frames para a memória
 		frames = (u16**)malloc(sizeof(u16*)*framesCount);
 		for (int i = 0; i < framesCount; i++)
 		{
-			//frames[i] = oamAllocateGfx(oam, SpriteSize_32x32, SpriteColorFormat_256Color);
-			dmaCopy(gfx, frames[i], 32*32);
-			gfx += 32*32;
+			frames[i] = oamAllocateGfx(oam, SpriteSize_32x32, SpriteColorFormat_256Color);
+			dmaCopy(gfx, frames[i], 1024);
+			gfx += 1024;
 		}
 
-		currentFrame = x = y = 0;
+		// Inicializa atributos do Sprite
+		oamSet(oam, id, 0, 0, 0, 0, SpriteSize_32x32, SpriteColorFormat_256Color, frames[0], 0, false, false, false, false, false);
 	}
 
 	void SetXY(int x, int y)
 	{
-		this->x = x;
-		this->y = y;
+		se->x = x;
+		se->y = y;
+	}
+
+	void Center()
+	{
+		se->x = 112;
+		se->y = 80;
 	}
 
 	void AddFrame()
@@ -53,21 +68,7 @@ public:
 		currentFrame++;
 		if (currentFrame == framesCount)
 			currentFrame = 0;
-		//oamSet(oam, id, x, y, 0, 0, SpriteSize_32x32, SpriteColorFormat_256Color, frames[currentFrame], -1, false, false, false, false, false);
-	}
-
-	void Update()
-	{
-		//oamSet(oam, id, x, y, 0, 0, SpriteSize_32x32, SpriteColorFormat_256Color, frames[currentFrame], -1, false, false, false, false, false);
-	}
-
-private:
-	int GetId()
-	{
-		for (int i = 0; i < MAX_SPRITE; i++)
-			if (!allocSprite[i])
-				return i;
-		return NO_SPRITE;
+		se->gfxIndex = oamGfxPtrToOffset(frames[currentFrame]);
 	}
 };
 
