@@ -81,10 +81,6 @@
 				Name="FLib"
 				>
 				<File
-					RelativePath=".\include\FLib\3D.h"
-					>
-				</File>
-				<File
 					RelativePath=".\include\FLib\Drawing.h"
 					>
 				</File>
@@ -93,11 +89,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\include\FLib\FLib.h"
+					RelativePath=".\include\FLib\FInputManager.h"
 					>
 				</File>
 				<File
-					RelativePath=".\include\FLib\FMain.h"
+					RelativePath=".\include\FLib\FLib.h"
 					>
 				</File>
 				<File
@@ -114,10 +110,6 @@
 				</File>
 				<File
 					RelativePath=".\include\FLib\FSprite.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\FLib\Keys.h"
 					>
 				</File>
 				<File
