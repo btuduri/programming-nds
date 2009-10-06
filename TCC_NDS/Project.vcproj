@@ -97,6 +97,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\include\FLib\FMath.h"
+					>
+				</File>
+				<File
 					RelativePath=".\include\FLib\FMusic.h"
 					>
 				</File>
@@ -110,10 +114,6 @@
 				</File>
 				<File
 					RelativePath=".\include\FLib\FSprite.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\FLib\Math.h"
 					>
 				</File>
 				<File
