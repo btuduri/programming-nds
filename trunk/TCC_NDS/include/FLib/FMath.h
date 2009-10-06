@@ -1,7 +1,7 @@
+#include "FLib.h"
+
 #ifndef _F_MATH_
 #define _F_MATH_
-
-#include "FLib.h"
 
 const s16 F_SineTable[512] = {
 	0x0000,0x0003,0x0006,0x0009,0x000D,0x0010,0x0013,0x0016,	0x0019,0x001C,0x001F,0x0022,0x0026,0x0029,0x002C,0x002F,
@@ -99,6 +99,11 @@ static inline u16 F_GetAngle(s32 startx, s32 starty, s32 targetx, s32 targety)
 	angle = F_AdjustAngle(angle, anglerot, startx, starty, targetx, targety);
 
 	return angle;
+}
+
+s16 F_CatmullRom(s16 p0, s16 p1, s16 p2, s16 p3, float t)
+{
+	return (s16)((p1 << 1) + (p2 - p0) * t + ((p0 << 1) - 5 * p1 + (p2 << 2) - p3) * t * t + (3 * p1 + p3 - p0 - 3 * p2) * t * t * t) >> 1;
 }
 
 #endif

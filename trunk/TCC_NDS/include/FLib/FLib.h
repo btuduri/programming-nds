@@ -7,6 +7,7 @@
 
 #include "soundbank.h"
 #include "soundbank_bin.h"
+#include "FMath.h"
 
 #include "FBackground.h"
 #include "FSprite.h"
