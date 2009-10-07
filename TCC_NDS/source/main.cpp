@@ -2,7 +2,7 @@
 #include "background.h"
 #include "man.h"
 
-float squareRot = 0;
+/*float squareRot = 0;
 float triangRot = 0;
 
 void DrawGLScene()
@@ -75,11 +75,11 @@ void DrawGLScene()
 		glVertex3f( 1.0f,-1.0f, 1.0f);					// Bottom Left Of The Quad (Right)
 		glVertex3f( 1.0f,-1.0f,-1.0f);					// Bottom Right Of The Quad (Right)
 	glEnd();
-}
+}*/
 
 int main(void)
 {
-	F_Init3D();
+	/*F_Init3D();
 	//F_Init2D();
 	vramSetBankA(VRAM_A_MAIN_BG_0x06000000);
 	vramSetBankB(VRAM_B_MAIN_SPRITE_0x06400000);
@@ -129,5 +129,27 @@ int main(void)
 		triangRot += 0.9f;
 		
 		F_Update();
-	}
+	}*/
+
+	consoleDemoInit();
+	videoSetMode(MODE_0_2D);
+	vramSetBankA(VRAM_A_MAIN_BG);
+	vramSetBankC(VRAM_C_SUB_BG);
+
+	mainBgPal->Load(backgroundPal);
+	mainSpPal->Load(manPal);
+	subBgPal->Load(backgroundPal);
+	subSpPal->Load(manPal);
+	
+	F_Background *bg = new F_Background(backgroundMap, 4, 4);
+	mainScreen->AddBackground(0, bg, 0, 0);
+	mainScreen->AddBackground(1, bg, 0, 0);
+	mainScreen->AddBackground(2, bg, 0, 0);
+	mainScreen->AddBackground(3, bg, 0, 0);
+	mainScreen->AddTileset(backgroundTiles, backgroundTilesLen);
+	subScreen->AddBackground(0, bg, 0, 0);
+	subScreen->AddBackground(1, bg, 0, 0);
+	subScreen->AddBackground(2, bg, 0, 0);
+	subScreen->AddBackground(3, bg, 0, 0);
+	subScreen->AddTileset(backgroundTiles, backgroundTilesLen);
 }
