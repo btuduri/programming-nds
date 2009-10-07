@@ -105,6 +105,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\include\FLib\FPalette.h"
+					>
+				</File>
+				<File
 					RelativePath=".\include\FLib\FScreen.h"
 					>
 				</File>
