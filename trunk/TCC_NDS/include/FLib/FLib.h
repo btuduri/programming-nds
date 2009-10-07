@@ -9,6 +9,8 @@
 #include "soundbank_bin.h"
 #include "FMath.h"
 
+#include "FPalette.h"
+
 #include "FBackground.h"
 #include "FSprite.h"
 #include "FScreen.h"
