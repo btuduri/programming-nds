@@ -7,6 +7,7 @@ class F_Background
 {
 	int id;
 	int layer;
+	bool mainEngine;
 
 	u16 *tilemap;
 	int map_base;
@@ -19,11 +20,11 @@ class F_Background
 	bool alternate_x, alternate_y;
 
 public:
-	F_Background(u16 *tilemap, int width, int height)
+	F_Background(const void* tilemap, int width, int height)
 	{
 		this->width = width;
 		this->height = height;
-		this->tilemap = tilemap;
+		this->tilemap = (u16*)tilemap;
 
 		screen_x = screen_y = 0;
 		limit_x = width * 256 - 256;
@@ -31,12 +32,13 @@ public:
 		alternate_x = alternate_y = false;
 	}
 
-	void Load(int layer, int init_x, int init_y)
+	void Load(bool mainEngine, int layer, int init_x, int init_y)
 	{
 		// Inicializa variáveis
 		// --------------------
 		ram_base = layer * 4;
 		this->layer = layer;
+		this->mainEngine = mainEngine;
 
 		x = init_x;
 		y = init_y;
@@ -78,17 +80,20 @@ public:
 			else
 				size = BgSize_T_512x512;
 
-		id = bgInit(layer, BgType_Text8bpp, size, ram_base, 2);
+		if (mainEngine)
+			id = bgInit(layer, BgType_Text8bpp, size, ram_base, 2);
+		else
+			id = bgInitSub(layer, BgType_Text8bpp, size, ram_base, 2);
 
 		// Copia mapas de memória
 		// ----------------------
 		map_base = ((y / 256) * width) + (x / 256);
 		if (adjust_x) map_base--;
 
-		dmaCopy(&tilemap[Offset(map_base)], BG_MAP_RAM(ram_base), 2048);
-		dmaCopy(&tilemap[Offset(map_base + 1)], BG_MAP_RAM(ram_base + 1), 2048);
-		dmaCopy(&tilemap[Offset(map_base + width)], BG_MAP_RAM(ram_base + 2), 2048);
-		dmaCopy(&tilemap[Offset(map_base + width + 1)], BG_MAP_RAM(ram_base + 3), 2048);
+		dmaCopy(&tilemap[Offset(map_base)], BgMapRam(ram_base), 2048);
+		dmaCopy(&tilemap[Offset(map_base + 1)], BgMapRam(ram_base + 1), 2048);
+		dmaCopy(&tilemap[Offset(map_base + width)], BgMapRam(ram_base + 2), 2048);
+		dmaCopy(&tilemap[Offset(map_base + width + 1)], BgMapRam(ram_base + 3), 2048);
 
 		bgSetScroll(id, screen_x, screen_y);
 	}
@@ -126,8 +131,8 @@ public:
 		{
 			screen_x -= 256;
 			map_base++;
-			dmaCopy(&tilemap[Offset(map_base + (alternate_y * width) + 1)], BG_MAP_RAM(ram_base + alternate_x), 2048);
-			dmaCopy(&tilemap[Offset(map_base + (!alternate_y * width) + 1)], BG_MAP_RAM(ram_base + 2 + alternate_x), 2048);
+			dmaCopy(&tilemap[Offset(map_base + (alternate_y * width) + 1)], BgMapRam(ram_base + alternate_x), 2048);
+			dmaCopy(&tilemap[Offset(map_base + (!alternate_y * width) + 1)], BgMapRam(ram_base + 2 + alternate_x), 2048);
 			alternate_x = !alternate_x;
 		}
 		else if (screen_x < 0)
@@ -135,16 +140,16 @@ public:
 			screen_x += 256;
 			map_base--;
 			alternate_x = !alternate_x;
-			dmaCopy(&tilemap[Offset(map_base + (alternate_y * width))], BG_MAP_RAM(ram_base + alternate_x), 2048);
-			dmaCopy(&tilemap[Offset(map_base + (!alternate_y * width))], BG_MAP_RAM(ram_base + 2 + alternate_x), 2048);
+			dmaCopy(&tilemap[Offset(map_base + (alternate_y * width))], BgMapRam(ram_base + alternate_x), 2048);
+			dmaCopy(&tilemap[Offset(map_base + (!alternate_y * width))], BgMapRam(ram_base + 2 + alternate_x), 2048);
 		}
 		
 		if (screen_y > 256)
 		{
 			screen_y -= 256;
 			map_base += width;
-			dmaCopy(&tilemap[Offset(map_base + width + alternate_x)], BG_MAP_RAM(ram_base + (2 * alternate_y)), 2048);
-			dmaCopy(&tilemap[Offset(map_base + width + !alternate_x)], BG_MAP_RAM(ram_base + (2 * alternate_y) + 1), 2048);
+			dmaCopy(&tilemap[Offset(map_base + width + alternate_x)], BgMapRam(ram_base + (2 * alternate_y)), 2048);
+			dmaCopy(&tilemap[Offset(map_base + width + !alternate_x)], BgMapRam(ram_base + (2 * alternate_y) + 1), 2048);
 			alternate_y = !alternate_y;
 		}
 		else if (screen_y < 0)
@@ -152,8 +157,8 @@ public:
 			screen_y += 256;
 			map_base -= width;
 			alternate_y = !alternate_y;
-			dmaCopy(&tilemap[Offset(map_base + alternate_x)], BG_MAP_RAM(ram_base + (2 * alternate_y)), 2048);
-			dmaCopy(&tilemap[Offset(map_base + !alternate_x)], BG_MAP_RAM(ram_base + (2 * alternate_y) + 1), 2048);
+			dmaCopy(&tilemap[Offset(map_base + alternate_x)], BgMapRam(ram_base + (2 * alternate_y)), 2048);
+			dmaCopy(&tilemap[Offset(map_base + !alternate_x)], BgMapRam(ram_base + (2 * alternate_y) + 1), 2048);
 		}
 
 		// Efetua o scroll
@@ -170,7 +175,7 @@ public:
 
 private:
 	int Offset(int i) { return i * 1024; }
-
+	u16* BgMapRam(int base) { return mainEngine ? BG_MAP_RAM(base) : BG_MAP_RAM_SUB(base); }
 };
 
 #endif
