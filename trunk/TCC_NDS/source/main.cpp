@@ -80,7 +80,7 @@ void DrawGLScene()
 int main(void)
 {
 	/*F_Init3D();
-	//F_Init2D();
+	//
 	vramSetBankA(VRAM_A_MAIN_BG_0x06000000);
 	vramSetBankB(VRAM_B_MAIN_SPRITE_0x06400000);
 
@@ -131,10 +131,7 @@ int main(void)
 		F_Update();
 	}*/
 
-	consoleDemoInit();
-	videoSetMode(MODE_0_2D);
-	vramSetBankA(VRAM_A_MAIN_BG);
-	vramSetBankC(VRAM_C_SUB_BG);
+	F_Init2D();
 
 	mainBgPal->Load(backgroundPal);
 	mainSpPal->Load(manPal);
@@ -152,4 +149,11 @@ int main(void)
 	subScreen->AddBackground(2, bg, 0, 0);
 	subScreen->AddBackground(3, bg, 0, 0);
 	subScreen->AddTileset(backgroundTiles, backgroundTilesLen);
+
+	F_Sprite *sprite = new F_Sprite((u8*)manTiles, 32, 32, 12);
+	mainScreen->AddSprite(sprite);
+	subScreen->AddSprite(sprite);
+
+	while(true)
+		F_Update();
 }
