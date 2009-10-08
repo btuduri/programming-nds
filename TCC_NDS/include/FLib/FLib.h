@@ -29,6 +29,9 @@ void F_Init2D()
 	videoSetMode(MODE_0_2D);
 	videoSetModeSub(MODE_0_2D);
 
+	// Inicializa Memória
+	vramSetMainBanks(VRAM_A_MAIN_BG, VRAM_B_MAIN_SPRITE_0x06400000, VRAM_C_SUB_BG, VRAM_D_SUB_SPRITE);
+
 	// Inicializa Sprites
 	oamInit(&oamMain, SpriteMapping_1D_32, false);
 	oamInit(&oamSub, SpriteMapping_1D_32, false);
