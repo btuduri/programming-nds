@@ -1,4 +1,4 @@
-#include "FLib/FLib.h"
+#include "FLib.h"
 #include "background.h"
 #include "man.h"
 
@@ -131,29 +131,19 @@ int main(void)
 		F_Update();
 	}*/
 
-	F_Init2D();
+	F_Main *flib = new F_Main();
+	flib->F_Init2D();
 
-	mainBgPal->Load(backgroundPal);
-	mainSpPal->Load(manPal);
-	subBgPal->Load(backgroundPal);
-	subSpPal->Load(manPal);
-	
 	F_Background *bg = new F_Background(backgroundMap, 4, 4);
-	mainScreen->AddBackground(0, bg, 0, 0);
-	mainScreen->AddBackground(1, bg, 0, 0);
-	mainScreen->AddBackground(2, bg, 0, 0);
-	mainScreen->AddBackground(3, bg, 0, 0);
-	mainScreen->AddTileset(backgroundTiles, backgroundTilesLen);
-	subScreen->AddBackground(0, bg, 0, 0);
-	subScreen->AddBackground(1, bg, 0, 0);
-	subScreen->AddBackground(2, bg, 0, 0);
-	subScreen->AddBackground(3, bg, 0, 0);
-	subScreen->AddTileset(backgroundTiles, backgroundTilesLen);
-
 	F_Sprite *sprite = new F_Sprite((u8*)manTiles, 32, 32, 12);
-	mainScreen->AddSprite(sprite);
-	subScreen->AddSprite(sprite);
+
+	flib->GetMainBgPal()->Load(backgroundPal);
+	flib->GetMainSpPal()->Load(manPal);
+	
+	flib->GetMainScreen()->AddBackground(0, bg, 0, 0);
+	flib->GetMainScreen()->AddTileset(backgroundTiles, backgroundTilesLen);
+	flib->GetMainScreen()->AddSprite(sprite);
 
 	while(true)
-		F_Update();
+		flib->F_Update();
 }
