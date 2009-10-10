@@ -24,8 +24,8 @@ include $(DEVKITARM)/ds_rules
 #---------------------------------------------------------------------------------
 TARGET     := $(shell basename $(CURDIR))
 BUILD      := build
-SOURCES    := source
-INCLUDES   := include
+SOURCES    := source flib/source
+INCLUDES   := include flib
 DATA       := data
 GRAPHICS   := graphics
 SOUNDS     := audio
