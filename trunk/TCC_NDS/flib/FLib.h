@@ -19,6 +19,7 @@
 #include "FSoundEffect.h"
 
 #include "FInputManager.h"
+#include "FConsole.h"
 #include "FMain.h"
 
 #endif

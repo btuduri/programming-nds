@@ -14,6 +14,7 @@ class F_Sprite
 	int framesCount;
 	u16** frames;
 	int size;
+	int middle_x, middle_y;
 
 	int currentFrame;
 	int animationFrame;
@@ -27,6 +28,7 @@ public:
 	F_Sprite(u8* gfx, int width, int height, int framesCount);
 	void Load(bool main, int id);
 	void SetXY(int x, int y);
+	void SetXYCorner(int x, int y);
 	void Center();
 	void AddFrame();
 };

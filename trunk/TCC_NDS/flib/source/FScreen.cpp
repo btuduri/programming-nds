@@ -27,7 +27,7 @@ void F_Screen::AddSprite(F_Sprite *sprite)
 void F_Screen::AddTileset(const void* tileset, int tilesetLen)
 {
 	if (mainEngine)
-		dmaCopy(tileset, BG_TILE_RAM(2), tilesetLen);
+		dmaCopy(tileset, BG_TILE_RAM(3), tilesetLen);
 	else
-		dmaCopy(tileset, BG_TILE_RAM_SUB(2), tilesetLen);
+		dmaCopy(tileset, BG_TILE_RAM_SUB(3), tilesetLen);
 }
