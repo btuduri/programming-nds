@@ -71,6 +71,50 @@
 				RelativePath=".\source\main.cpp"
 				>
 			</File>
+			<Filter
+				Name="FLib"
+				>
+				<File
+					RelativePath=".\flib\source\FBackground.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\flib\source\FConsole.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\flib\source\FInputManager.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\flib\source\FMain.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\flib\source\FMath.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\flib\source\FMusic.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\flib\source\FPalette.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\flib\source\FScreen.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\flib\source\FSoundEffect.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\flib\source\FSprite.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -81,55 +125,47 @@
 				Name="FLib"
 				>
 				<File
-					RelativePath=".\include\FLib\Drawing.h"
+					RelativePath=".\flib\FBackground.h"
 					>
 				</File>
 				<File
-					RelativePath=".\include\FLib\FBackground.h"
+					RelativePath=".\flib\FConsole.h"
 					>
 				</File>
 				<File
-					RelativePath=".\include\FLib\FInputManager.h"
+					RelativePath=".\flib\FInputManager.h"
 					>
 				</File>
 				<File
-					RelativePath=".\include\FLib\FLib.h"
+					RelativePath=".\flib\FLib.h"
 					>
 				</File>
 				<File
-					RelativePath=".\include\FLib\FMath.h"
+					RelativePath=".\flib\FMain.h"
 					>
 				</File>
 				<File
-					RelativePath=".\include\FLib\FMusic.h"
+					RelativePath=".\flib\FMath.h"
 					>
 				</File>
 				<File
-					RelativePath=".\include\FLib\FPalette.h"
+					RelativePath=".\flib\FMusic.h"
 					>
 				</File>
 				<File
-					RelativePath=".\include\FLib\FScreen.h"
+					RelativePath=".\flib\FPalette.h"
 					>
 				</File>
 				<File
-					RelativePath=".\include\FLib\FSoundEffect.h"
+					RelativePath=".\flib\FScreen.h"
 					>
 				</File>
 				<File
-					RelativePath=".\include\FLib\FSprite.h"
+					RelativePath=".\flib\FSoundEffect.h"
 					>
 				</File>
 				<File
-					RelativePath=".\include\FLib\Memory.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\FLib\Sound.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\FLib\Text.h"
+					RelativePath=".\flib\FSprite.h"
 					>
 				</File>
 			</Filter>

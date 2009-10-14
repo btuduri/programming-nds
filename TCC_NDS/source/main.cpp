@@ -2,7 +2,7 @@
 #include "background.h"
 #include "man.h"
 
-/*float squareRot = 0;
+float squareRot = 0;
 float triangRot = 0;
 
 void DrawGLScene()
@@ -75,50 +75,52 @@ void DrawGLScene()
 		glVertex3f( 1.0f,-1.0f, 1.0f);					// Bottom Left Of The Quad (Right)
 		glVertex3f( 1.0f,-1.0f,-1.0f);					// Bottom Right Of The Quad (Right)
 	glEnd();
-}*/
+}
 
 int main(void)
 {
-	/*F_Init3D();
-	//
-	vramSetBankA(VRAM_A_MAIN_BG_0x06000000);
-	vramSetBankB(VRAM_B_MAIN_SPRITE_0x06400000);
+	F_Main *flib = new F_Main();
+	F_Console *console = new F_Console();
+	F_InputManager *im = flib->GetInputManager();
 
-	consoleDemoInit();
+	flib->F_Init2D();	
 
-	F_Screen *screen = new F_Screen((u8*)backgroundTiles, backgroundTilesLen, (u16*)backgroundPal, (u16*)manPal);
-	F_Background *bg = new F_Background((u16*)backgroundMap, 4, 4);
-	F_Sprite *sprite = new F_Sprite((u8*)manTiles, 12);
-		
-	//F_Music *m = new F_Music(MOD_MUSIC);	
-	//s->SetMusic(m);
+	F_Background *bg = new F_Background(backgroundMap, 4, 4);
+	F_Sprite *sprite = new F_Sprite((u8*)manTiles, 32, 32, 12);
+
+	flib->GetMainBgPal()->Load(backgroundPal);
+	flib->GetMainSpPal()->Load(manPal);
 	
-	screen->AddBackground(2, bg, 0, 0);
-	screen->AddSprite(sprite);
+	flib->GetMainScreen()->AddBackground(3, bg, 0, 0);
+	flib->GetMainScreen()->AddTileset(backgroundTiles, backgroundTilesLen);
+	flib->GetMainScreen()->AddSprite(sprite);
+
+	console->PrintMain();
+	console->PrintSub();
 
 	sprite->Center();
-	
+
 	while(true)
 	{
-		if (im.Pad.Right.Held)
+		if (im->Pad.Right.Held)
 		{
 			bg->Scroll(4, 0);
 		}
-		else if (im.Pad.Left.Held)
+		else if (im->Pad.Left.Held)
 		{
 			bg->Scroll(-4, 0);
 		}
 
-		if (im.Pad.Up.Held)
+		if (im->Pad.Up.Held)
 		{
 			bg->Scroll(0, -4);
 		}
-		else if (im.Pad.Down.Held)
+		else if (im->Pad.Down.Held)
 		{
 			bg->Scroll(0, 4);
 		}
 
-		if (im.Pad.A.Pressed)
+		if (im->Pad.A.Pressed)
 		{
 			sprite->AddFrame();
 		}
@@ -127,23 +129,7 @@ int main(void)
 
 		squareRot += 0.75f;
 		triangRot += 0.9f;
-		
-		F_Update();
-	}*/
 
-	F_Main *flib = new F_Main();
-	flib->F_Init2D();
-
-	F_Background *bg = new F_Background(backgroundMap, 4, 4);
-	F_Sprite *sprite = new F_Sprite((u8*)manTiles, 32, 32, 12);
-
-	flib->GetMainBgPal()->Load(backgroundPal);
-	flib->GetMainSpPal()->Load(manPal);
-	
-	flib->GetMainScreen()->AddBackground(0, bg, 0, 0);
-	flib->GetMainScreen()->AddTileset(backgroundTiles, backgroundTilesLen);
-	flib->GetMainScreen()->AddSprite(sprite);
-
-	while(true)
 		flib->F_Update();
+	}
 }
