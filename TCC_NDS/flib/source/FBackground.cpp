@@ -65,9 +65,9 @@ void F_Background::Load(bool mainEngine, int layer, int init_x, int init_y)
 			size = BgSize_T_512x512;
 
 	if (mainEngine)
-		id = bgInit(layer, BgType_Text8bpp, size, ram_base, 2);
+		id = bgInit(layer, BgType_Text8bpp, size, ram_base, 3);
 	else
-		id = bgInitSub(layer, BgType_Text8bpp, size, ram_base, 2);
+		id = bgInitSub(layer, BgType_Text8bpp, size, ram_base, 3);
 
 	// Copia mapas de memória
 	// ----------------------
