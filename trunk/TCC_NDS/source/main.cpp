@@ -80,7 +80,6 @@ void DrawGLScene()
 int main(void)
 {
 	F_Main *flib = new F_Main();
-	F_Console *console = new F_Console();
 	F_InputManager *im = flib->GetInputManager();
 
 	flib->F_Init2D();	
@@ -95,8 +94,10 @@ int main(void)
 	flib->GetMainScreen()->AddTileset(backgroundTiles, backgroundTilesLen);
 	flib->GetMainScreen()->AddSprite(sprite);
 
-	console->PrintMain();
-	console->PrintSub();
+	F_Console *mc = new F_Console(true);
+	F_Console *sc = new F_Console(false);
+	mc->SetWindow(5, 5, 15, 3);
+	mc->Print("Quanto tempo faz\nque voce se foi\nagora vou fazer um texto\nbem cumpridinho.\n\n\nVamos nessa rapaziada...", 20);
 
 	sprite->Center();
 
