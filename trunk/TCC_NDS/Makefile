@@ -24,10 +24,9 @@ include $(DEVKITARM)/ds_rules
 #---------------------------------------------------------------------------------
 TARGET     := $(shell basename $(CURDIR))
 BUILD      := build
-SOURCES    := source flib/source
-INCLUDES   := include flib
+SOURCES    := source flib/source graphics/sprites graphics/backgrounds
+INCLUDES   := include flib graphics/sprites graphics/backgrounds
 DATA       := data
-GRAPHICS   := graphics
 SOUNDS     := audio
 
 #---------------------------------------------------------------------------------
@@ -67,18 +66,13 @@ ifneq ($(BUILD),$(notdir $(CURDIR)))
 export OUTPUT  := $(CURDIR)/$(TARGET)
 
 export VPATH   := $(foreach dir,$(SOURCES),$(CURDIR)/$(dir))\
-                  $(foreach dir,$(DATA),$(CURDIR)/$(dir))\
-                  $(foreach dir,$(GRAPHICS),$(CURDIR)/$(dir))
+                  $(foreach dir,$(DATA),$(CURDIR)/$(dir))
 
 export DEPSDIR := $(CURDIR)/$(BUILD)
 
 SFILES   := $(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.s)))
 CFILES   := $(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.c)))
 CPPFILES := $(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.cpp)))
-PNGFILES := $(foreach dir,$(GRAPHICS),$(notdir $(wildcard $(dir)/*.png)))
-BMPFILES := $(foreach dir,$(GRAPHICS),$(notdir $(wildcard $(dir)/*.bmp)))
-JPGFILES := $(foreach dir,$(GRAPHICS),$(notdir $(wildcard $(dir)/*.jpg)))
-PCXFILES := $(foreach dir,$(GRAPHICS),$(notdir $(wildcard $(dir)/*.pcx)))
 BINFILES := $(foreach dir,$(DATA),$(notdir $(wildcard $(dir)/*.*))) soundbank.bin
 
 export AUDIOFILES := $(foreach dir,$(notdir $(wildcard $(SOUNDS)/*.*)),$(CURDIR)/$(SOUNDS)/$(dir))
@@ -95,8 +89,6 @@ endif
 #---------------------------------------------------------------------------------
 
 export OFILES   := $(addsuffix .o,$(BINFILES))\
-                   $(PNGFILES:.png=.o) $(BMPFILES:.bmp=.o)\
-                   $(JPGFILES:.jpg=.o) $(PCXFILES:.pcx=.o)\
                    $(CPPFILES:.cpp=.o) $(CFILES:.c=.o) $(SFILES:.s=.o)
  
 export INCLUDE  := $(foreach dir,$(INCLUDES),-iquote $(CURDIR)/$(dir))\
@@ -148,53 +140,6 @@ soundbank.bin : $(AUDIOFILES)
 	@echo $(notdir $<)
 	$(bin2o)
 
-#---------------------------------------------------------------------------------
-# This rule creates assembly source files using grit
-# grit takes an image file and a .grit describing how the file is to be processed
-# add additional rules like this for each image extension
-# you use in the graphics folders
-#---------------------------------------------------------------------------------
-%.s %.h : %.png %.grit
-#---------------------------------------------------------------------------------
-	grit $< -fts -o$*
-
--include $(DEPSDIR)/*.d
-#---------------------------------------------------------------------------------
-%.s %.h : %.bmp %.grit
-#---------------------------------------------------------------------------------
-	grit $< -fts -o$*
-
--include $(DEPSDIR)/*.d
-#---------------------------------------------------------------------------------
-%.s %.h : %.jpg %.grit
-#---------------------------------------------------------------------------------
-	grit $< -fts -o$*
-
--include $(DEPSDIR)/*.d
-#---------------------------------------------------------------------------------
-%.s %.h : %.pcx %.grit
-#---------------------------------------------------------------------------------
-	grit $< -fts -o$*
-
--include $(DEPSDIR)/*.d
-#---------------------------------------------------------------------------------
-%.s %.h : %.png
-#---------------------------------------------------------------------------------
-	grit $< -fts -ff../$(GRAPHICS)/default.grit -o$*
-
--include $(DEPSDIR)/*.d
-#---------------------------------------------------------------------------------
-%.s %.h : %.bmp
-#---------------------------------------------------------------------------------
-	grit $< -fts -ff../$(GRAPHICS)/default.grit -o$*
-
--include $(DEPSDIR)/*.d
-#---------------------------------------------------------------------------------
-%.s %.h : %.jpg
-#---------------------------------------------------------------------------------
-	grit $< -fts -ff../$(GRAPHICS)/default.grit -o$*
-
--include $(DEPSDIR)/*.d
 #---------------------------------------------------------------------------------
 endif
 #---------------------------------------------------------------------------------

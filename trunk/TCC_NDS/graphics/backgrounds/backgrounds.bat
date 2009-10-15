@@ -1,0 +1,1 @@
+..\grit *.png -gB8 -gTFF00FF -m -mLs -pS -obackgrounds -Sbackgrounds -fa -ftc

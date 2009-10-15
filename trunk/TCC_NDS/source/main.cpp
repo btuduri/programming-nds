@@ -1,6 +1,7 @@
 #include "FLib.h"
-#include "background.h"
-#include "man.h"
+
+#include "backgrounds.h"
+#include "sprites.h"
 
 float squareRot = 0;
 float triangRot = 0;
@@ -87,8 +88,8 @@ int main(void)
 	F_Background *bg = new F_Background(backgroundMap, 4, 4);
 	F_Sprite *sprite = new F_Sprite((u8*)manTiles, 32, 32, 12);
 
-	flib->GetMainBgPal()->Load(backgroundPal);
-	flib->GetMainSpPal()->Load(manPal);
+	flib->GetMainBgPal()->Load(backgroundsPal);
+	flib->GetMainSpPal()->Load(spritesPal);
 	
 	flib->GetMainScreen()->AddBackground(3, bg, 0, 0);
 	flib->GetMainScreen()->AddTileset(backgroundTiles, backgroundTilesLen);
@@ -96,8 +97,8 @@ int main(void)
 
 	F_Console *mc = new F_Console(true);
 	F_Console *sc = new F_Console(false);
-	mc->SetWindow(5, 5, 15, 3);
-	mc->Print("Quanto tempo faz\nque voce se foi\nagora vou fazer um texto\nbem cumpridinho.\n\n\nVamos nessa rapaziada...", 20);
+	sc->SetWindow(5, 5, 16, 3);
+	sc->Print("Quanto tempo faz\nQue voce se foi\nAonde foi nao\nTinha telefone\n\nAgora vou fazer um texto\nbem cumpridinho.\n\n\nVamos nessa rapaziada...", 20);
 
 	sprite->Center();
 
