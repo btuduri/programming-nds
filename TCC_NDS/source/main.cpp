@@ -83,7 +83,7 @@ int main(void)
 	F_Main *flib = new F_Main();
 	F_InputManager *im = flib->GetInputManager();
 
-	flib->F_Init2D();	
+	flib->Init2D();	
 
 	F_Background *bg = new F_Background(backgroundMap, 4, 4);
 	F_Sprite *sprite = new F_Sprite((u8*)manTiles, 32, 32, 12);
@@ -132,6 +132,6 @@ int main(void)
 		squareRot += 0.75f;
 		triangRot += 0.9f;
 
-		flib->F_Update();
+		flib->Update();
 	}
 }
