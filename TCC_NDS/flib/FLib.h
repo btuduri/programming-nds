@@ -4,6 +4,7 @@
 #include <nds.h>
 #include <maxmod9.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "soundbank.h"
 #include "soundbank_bin.h"
