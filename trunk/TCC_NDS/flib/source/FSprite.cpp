@@ -6,8 +6,11 @@ F_Sprite::F_Sprite(u8* gfx, int width, int height, int framesCount)
 	this->framesCount = framesCount;
 	currentFrame = 0;
 	size = width * height;
+	x = y = 0;
 	middle_x = width >> 1;
 	middle_y = height >> 1;
+	this->width = width;
+	visible = true;
 
 	if (width == 8)
 	{
@@ -68,20 +71,48 @@ void F_Sprite::Load(bool main, int id)
 
 void F_Sprite::SetXY(int x, int y)
 {
-	se->x = x - middle_x;
-	se->y = y - middle_y;
+	this->x = x - middle_x;
+	this->y = y - middle_y;
+	if (visible)
+	{
+		se->x = this->x;
+		se->y = this->y;
+	}
 }
 
 void F_Sprite::SetXYCorner(int x, int y)
 {
-	se->x = x;
-	se->y = y;
+	this->x = x;
+	this->y = y;
+	if (visible)
+	{
+		se->x = x;
+		se->y = y;
+	}
 }
 
 void F_Sprite::Center()
 {
-	se->x = 128 - middle_x;
-	se->y = 96 - middle_y;
+	x = 128 - middle_x;
+	y = 96 - middle_y;
+	if (visible)
+	{
+		se->x = x;
+		se->y = y;
+	}
+}
+
+void F_Sprite::Show()
+{
+	visible = true;
+	se->x = x;
+	se->y = y;
+}
+
+void F_Sprite::Hide()
+{
+	visible = false;
+	se->x = 0 - width;
 }
 
 void F_Sprite::AddFrame()
