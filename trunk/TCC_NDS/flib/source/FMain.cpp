@@ -45,7 +45,7 @@ F_InputManager* F_Main::GetInputManager()
 	return &inputManager;
 }
 
-void F_Main::F_Init2D()
+void F_Main::Init2D()
 {
 	// Inicializa Som
 	mmInitDefaultMem((mm_addr)soundbank_bin);
@@ -62,7 +62,7 @@ void F_Main::F_Init2D()
 	oamInit(&oamSub, SpriteMapping_1D_32, false);
 }
 
-void F_Main::F_Init3D()
+void F_Main::Init3D()
 {
 	// Inicializa Som
 	mmInitDefaultMem((mm_addr)soundbank_bin);
@@ -86,7 +86,7 @@ void F_Main::F_Init3D()
 	glMatrixMode(GL_MODELVIEW);
 }
 
-void F_Main::F_Update()
+void F_Main::Update()
 {
 	swiWaitForVBlank();
 

@@ -24,9 +24,9 @@ public:
 	F_Palette* GetSubSpPal();
 	F_InputManager* GetInputManager();
 
-	void F_Init2D();
-	void F_Init3D();
-	void F_Update();
+	void Init2D();
+	void Init3D();
+	void Update();
 };
 
 #endif
