@@ -126,6 +126,15 @@ int main(void)
 		{
 			sprite->AddFrame();
 		}
+		else if (im->Pad.B.Pressed)
+		{
+			sprite->Hide();
+		}
+		else if (im->Pad.Y.Pressed)
+		{
+			sprite->Show();
+		}
+
 
 		DrawGLScene();
 
