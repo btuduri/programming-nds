@@ -1,1 +1,1 @@
-..\grit *.png -gB8 -gTFF00FF -Mh4 -Mw4 -pS -osprites -Ssprites -fa -ftc
+..\grit *.png -gB8 -gTFF00FF -pS -osprites -Ssprites -fa -ftc

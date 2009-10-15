@@ -8,7 +8,7 @@
 //	+ 192 tiles Metatiled by 4x4 not compressed
 //	Total size: 12288 = 12288
 //
-//	Time-stamp: 2009-10-15, 16:04:41
+//	Time-stamp: 2009-10-15, 16:38:08
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.3
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -33,7 +33,7 @@ extern const unsigned int manTiles[3072];
 //	+ 192 tiles Metatiled by 4x4 not compressed
 //	Total size: 12288 = 12288
 //
-//	Time-stamp: 2009-10-15, 16:04:41
+//	Time-stamp: 2009-10-15, 16:38:08
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.3
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -58,7 +58,7 @@ extern const unsigned int womanTiles[3072];
 //	+ palette 55 entries, not compressed
 //	Total size: 110 = 110
 //
-//	Time-stamp: 2009-10-15, 16:04:41
+//	Time-stamp: 2009-10-15, 16:38:08
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.3
 //	( http://www.coranac.com/projects/#grit )
 //
