@@ -1,7 +1,6 @@
-#include "FLib.h"
+#pragma once
 
-#ifndef _F_SCREEN_
-#define _F_SCREEN_
+#include "FLib.h"
 
 class F_Screen
 {
@@ -20,5 +19,3 @@ public:
 	void AddSprite(F_Sprite *sprite);
 	void AddTileset(const void* tileset, int tilesetLen);
 };
-
-#endif

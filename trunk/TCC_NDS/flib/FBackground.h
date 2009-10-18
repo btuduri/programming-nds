@@ -1,7 +1,6 @@
-#include "FLib.h"
+#pragma once
 
-#ifndef _F_BACKGROUND_
-#define _F_BACKGROUND_
+#include "FLib.h"
 
 class F_Background
 {
@@ -31,5 +30,3 @@ private:
 	int Offset(int i) { return i * 1024; }
 	u16* BgMapRam(int base) { return mainEngine ? BG_MAP_RAM(base) : BG_MAP_RAM_SUB(base); }
 };
-
-#endif

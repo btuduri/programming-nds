@@ -1,7 +1,6 @@
-#include "FLib.h"
+#pragma once
 
-#ifndef _F_MAIN_
-#define _F_MAIN_
+#include "FLib.h"
 
 class F_Main
 {
@@ -31,5 +30,3 @@ public:
 	void Init3D();
 	void Update();
 };
-
-#endif

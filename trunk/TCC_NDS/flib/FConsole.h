@@ -1,7 +1,6 @@
-#include "FLib.h"
+#pragma once
 
-#ifndef _F_CONSOLE_
-#define _F_CONSOLE_
+#include "FLib.h"
 
 class F_Console
 {
@@ -25,5 +24,3 @@ public:
 	int GetWindowWidth();
 	int GetWindowHeight();
 };
-
-#endif

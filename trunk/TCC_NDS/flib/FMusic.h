@@ -1,7 +1,6 @@
-#include "FLib.h"
+#pragma once
 
-#ifndef _F_MUSIC_
-#define _F_MUSIC_
+#include "FLib.h"
 
 class F_Music
 {
@@ -14,5 +13,3 @@ public:
 	void Pause();
 	void Resume();
 };
-
-#endif

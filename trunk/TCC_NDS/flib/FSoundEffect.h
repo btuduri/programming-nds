@@ -1,7 +1,6 @@
-#include "FLib.h"
+#pragma once
 
-#ifndef _F_SOUND_EFFECT_
-#define _F_SOUND_EFFECT_
+#include "FLib.h"
 
 class F_SoundEffect
 {
@@ -12,5 +11,3 @@ public:
 	~F_SoundEffect();
 	void Play();
 };
-
-#endif

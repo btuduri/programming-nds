@@ -1,7 +1,6 @@
-#include "FLib.h"
+#pragma once
 
-#ifndef _F_PALETTE_
-#define _F_PALETTE_
+#include "FLib.h"
 
 enum PaletteType
 {
@@ -25,5 +24,3 @@ public:
 	void SetColor16(int paletteIndex, int colorIndex, u16 color);
 	void Load16(int paletteIndex, u16* memory);
 };
-
-#endif
