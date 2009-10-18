@@ -83,8 +83,6 @@ int main(void)
 	F_Main *flib = new F_Main();
 	F_InputManager *im = flib->GetInputManager();
 
-	flib->Init2D();	
-
 	F_Background *bg = new F_Background(backgroundMap, 4, 4);
 	F_Sprite *sprite = new F_Sprite((u8*)manTiles, 32, 32, 12);
 
@@ -95,11 +93,10 @@ int main(void)
 	flib->GetMainScreen()->AddTileset(backgroundTiles, backgroundTilesLen);
 	flib->GetMainScreen()->AddSprite(sprite);
 
-	F_Console *mc = new F_Console(true);
-	F_Console *sc = new F_Console(false);
+	F_Console *sc = flib->GetSubConsole();
 	sc->SetWindow(5, 5, 16, 3);
-	sc->Print("Quanto tempo faz\nQue voce se foi\nAonde foi nao\nTinha telefone\n\nAgora vou fazer um texto\nbem cumpridinho.\n\n\nVamos nessa rapaziada...", 20);
-
+	sc->Print("Hello world diretamente da engine secundaria...", 20);
+	
 	sprite->Center();
 
 	while(true)

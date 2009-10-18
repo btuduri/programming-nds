@@ -2,6 +2,7 @@
 
 F_Console::F_Console(bool mainEngine)
 {
+	this->mainEngine = mainEngine;
 	consoleInit(&printConsole, mainEngine ? 1 : 0, BgType_Text4bpp, BgSize_T_256x256, 4, 2, mainEngine, true);
 }
 
@@ -14,6 +15,7 @@ void F_Console::Print(const char* text)
 void F_Console::Print(const char* text, int time)
 {
 	consoleSelect(&printConsole);
+	consoleClear();	
 	
 	int textLen = strlen(text);
 	char* textTemp = (char*)malloc(sizeof(char)*textLen);
@@ -29,6 +31,41 @@ void F_Console::Print(const char* text, int time)
 		for (int wait = 0; wait < time; wait++)
 			swiWaitForVBlank();
 	}
+}
+
+void F_Console::Clear()
+{
+	consoleSelect(&printConsole);
+	consoleClear();
+}
+
+void F_Console::ClearScreen()
+{
+	consoleSelect(&printConsole);
+	int x = printConsole.windowX;
+	int y = printConsole.windowY;
+	int width = printConsole.windowWidth;
+	int height = printConsole.windowHeight;
+
+	printConsole.windowX = 0;
+	printConsole.windowY = 0;
+	printConsole.windowWidth = 32;
+	printConsole.windowHeight = 32;
+	
+	consoleClear();
+
+	printConsole.windowX = x;
+	printConsole.windowY = y;
+	printConsole.windowWidth = width;
+	printConsole.windowHeight = height;
+}
+
+void F_Console::SetColor(u16 color)
+{
+	if (mainEngine)
+		BG_PALETTE[255] = color;
+	else
+		BG_PALETTE_SUB[255] = color;
 }
 
 void F_Console::SetCursorXY(int x, int y)
