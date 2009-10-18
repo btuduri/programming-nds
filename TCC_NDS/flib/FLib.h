@@ -1,5 +1,4 @@
-#ifndef _F_LIB_
-#define _F_LIB_
+#pragma once
 
 #include <nds.h>
 #include <maxmod9.h>
@@ -22,5 +21,3 @@
 #include "FInputManager.h"
 #include "FConsole.h"
 #include "FMain.h"
-
-#endif

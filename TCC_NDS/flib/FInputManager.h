@@ -1,7 +1,6 @@
-#include "FLib.h"
+#pragma once
 
-#ifndef _F_INPUT_MANAGER_
-#define _F_INPUT_MANAGER_
+#include "FLib.h"
 
 struct F_KeyState { bool Pressed, Released, Held; };
 struct F_Keys { F_KeyState Up, Down, Left, Right, A, B, X, Y, L, R, Start, Select; };
@@ -80,5 +79,3 @@ struct F_InputManager
 		Touch.Y = tp.py;
 	}
 };
-
-#endif

@@ -1,7 +1,6 @@
-#include "FLib.h"
+#pragma once
 
-#ifndef _F_SPRITE_
-#define _F_SPRITE_
+#include "FLib.h"
 
 #define ANIM_LOOP 0
 #define ANIM_UPDOWN 1
@@ -36,5 +35,3 @@ public:
 	void Hide();
 	void AddFrame();
 };
-
-#endif
