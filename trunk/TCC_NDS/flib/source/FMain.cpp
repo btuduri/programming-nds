@@ -2,12 +2,29 @@
 
 F_Main::F_Main()
 {
-	mainScreen = new F_Screen(true);
-	subScreen  = new F_Screen(false);
-	mainBgPal  = new F_Palette(PaletteType_Main_Background);
-	mainSpPal  = new F_Palette(PaletteType_Main_Sprite);
-	subBgPal   = new F_Palette(PaletteType_Sub_Background);
-	subSpPal   = new F_Palette(PaletteType_Sub_Sprite);
+	// Inicializa Som
+	mmInitDefaultMem((mm_addr)soundbank_bin);
+
+	// Inicializa Gráfico
+	videoSetMode(MODE_0_2D);
+	videoSetModeSub(MODE_0_2D);
+
+	// Inicializa Memória
+	vramSetMainBanks(VRAM_A_MAIN_BG, VRAM_B_MAIN_SPRITE_0x06400000, VRAM_C_SUB_BG, VRAM_D_SUB_SPRITE);
+
+	// Inicializa Sprites
+	oamInit(&oamMain, SpriteMapping_1D_32, false);
+	oamInit(&oamSub, SpriteMapping_1D_32, false);
+
+	// Inicializa Variáveis
+	mainScreen  = new F_Screen(true);
+	subScreen   = new F_Screen(false);
+	mainBgPal   = new F_Palette(PaletteType_Main_Background);
+	mainSpPal   = new F_Palette(PaletteType_Main_Sprite);
+	subBgPal    = new F_Palette(PaletteType_Sub_Background);
+	subSpPal    = new F_Palette(PaletteType_Sub_Sprite);
+	mainConsole = new F_Console(true);
+	subConsole  = new F_Console(false);
 }
 
 F_Screen* F_Main::GetMainScreen()
@@ -45,35 +62,20 @@ F_InputManager* F_Main::GetInputManager()
 	return &inputManager;
 }
 
-void F_Main::Init2D()
+F_Console* F_Main::GetMainConsole()
 {
-	// Inicializa Som
-	mmInitDefaultMem((mm_addr)soundbank_bin);
+	return mainConsole;
+}
 
-	// Inicializa Gráfico
-	videoSetMode(MODE_0_2D);
-	videoSetModeSub(MODE_0_2D);
-
-	// Inicializa Memória
-	vramSetMainBanks(VRAM_A_MAIN_BG, VRAM_B_MAIN_SPRITE_0x06400000, VRAM_C_SUB_BG, VRAM_D_SUB_SPRITE);
-
-	// Inicializa Sprites
-	oamInit(&oamMain, SpriteMapping_1D_32, false);
-	oamInit(&oamSub, SpriteMapping_1D_32, false);
+F_Console* F_Main::GetSubConsole()
+{
+	return subConsole;
 }
 
 void F_Main::Init3D()
 {
-	// Inicializa Som
-	mmInitDefaultMem((mm_addr)soundbank_bin);
-
 	// Inicializa Gráfico
 	videoSetMode(MODE_0_3D);
-	//videoSetModeSub(MODE_0_2D);
-
-	// Inicializa Sprites
-	oamInit(&oamMain, SpriteMapping_1D_32, false);
-	//oamInit(&oamSub, SpriteMapping_1D_32, false);
 
 	// Inicializa Opengl
 	glInit();
@@ -92,7 +94,7 @@ void F_Main::Update()
 
 	bgUpdate();
 	oamUpdate(&oamMain);
-	//oamUpdate(&oamSub);
+	oamUpdate(&oamSub);
 	
 	glFlush(0);
 

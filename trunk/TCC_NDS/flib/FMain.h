@@ -12,6 +12,8 @@ class F_Main
 	F_Palette* mainSpPal;
 	F_Palette* subBgPal;
 	F_Palette* subSpPal;
+	F_Console* mainConsole;
+	F_Console* subConsole;
 
 public:
 	F_Main();
@@ -23,8 +25,9 @@ public:
 	F_Palette* GetSubBgPal();
 	F_Palette* GetSubSpPal();
 	F_InputManager* GetInputManager();
+	F_Console* GetMainConsole();
+	F_Console* GetSubConsole();
 
-	void Init2D();
 	void Init3D();
 	void Update();
 };

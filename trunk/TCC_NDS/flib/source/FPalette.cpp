@@ -52,7 +52,7 @@ void F_Palette::SetColor(int index, u16 color)
 
 void F_Palette::Load(const void* memory)
 {
-	dmaCopy(memory, palette, 512);
+	dmaCopy(memory, palette, 510);
 }
 
 u16 F_Palette::GetColor16(int paletteIndex, int colorIndex)
