@@ -5,13 +5,6 @@ F_Screen::F_Screen(bool mainEngine)
 	this->mainEngine = mainEngine;
 }
 
-void F_Screen::Enable3D()
-{
-	if (mainEngine)
-	{
-	}
-}
-
 void F_Screen::AddBackground(int layer, F_Background *background, int init_x, int init_y)
 {
 	backgrounds[layer] = background;

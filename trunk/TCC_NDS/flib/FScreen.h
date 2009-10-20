@@ -14,7 +14,6 @@ private:
 public:
 
 	F_Screen(bool mainEngine);
-	void Enable3D();
 	void AddBackground(int layer, F_Background *background, int init_x, int init_y);
 	void AddSprite(F_Sprite *sprite);
 	void AddTileset(const void* tileset, int tilesetLen);
