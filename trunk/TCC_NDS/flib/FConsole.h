@@ -2,13 +2,13 @@
 
 #include "FLib.h"
 
-class F_Console
+class FConsole
 {
 	PrintConsole printConsole;
 	bool mainEngine;
 
 public:
-	F_Console(bool mainEngine);
+	FConsole(bool mainEngine);
 
 	void Print(const char* text);
 	void Print(const char* text, int time);

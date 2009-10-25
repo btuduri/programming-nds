@@ -2,22 +2,27 @@
 
 #include <nds.h>
 #include <maxmod9.h>
+
 #include <stdio.h>
 #include <string.h>
 
 #include "soundbank.h"
 #include "soundbank_bin.h"
+
 #include "FMath.h"
-
-#include "FPalette.h"
-
-#include "FBackground.h"
-#include "FSprite.h"
-#include "FScreen.h"
-
-#include "FMusic.h"
-#include "FSoundEffect.h"
-
+#include "FSoundManager.h"
 #include "FInputManager.h"
-#include "FConsole.h"
-#include "FMain.h"
+#include "FVideoManager.h"
+
+class FLib
+{
+	FInputManager* inputManager;
+	FVideoManager* videoManager;
+
+public:
+	FLib();
+
+	FInputManager* GetInputManager();
+	FVideoManager* GetVideoManager();
+	void Update();	
+};

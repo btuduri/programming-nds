@@ -1,18 +1,18 @@
 #include "FLib.h"
 
-F_Console::F_Console(bool mainEngine)
+FConsole::FConsole(bool mainEngine)
 {
 	this->mainEngine = mainEngine;
 	consoleInit(&printConsole, mainEngine ? 1 : 0, BgType_Text4bpp, BgSize_T_256x256, 4, 2, mainEngine, true);
 }
 
-void F_Console::Print(const char* text)
+void FConsole::Print(const char* text)
 {
 	consoleSelect(&printConsole);
 	printf(text);
 }
 
-void F_Console::Print(const char* text, int time)
+void FConsole::Print(const char* text, int time)
 {
 	consoleSelect(&printConsole);
 	consoleClear();	
@@ -33,13 +33,13 @@ void F_Console::Print(const char* text, int time)
 	}
 }
 
-void F_Console::Clear()
+void FConsole::Clear()
 {
 	consoleSelect(&printConsole);
 	consoleClear();
 }
 
-void F_Console::ClearScreen()
+void FConsole::ClearScreen()
 {
 	consoleSelect(&printConsole);
 	int x = printConsole.windowX;
@@ -60,7 +60,7 @@ void F_Console::ClearScreen()
 	printConsole.windowHeight = height;
 }
 
-void F_Console::SetColor(u16 color)
+void FConsole::SetColor(u16 color)
 {
 	if (mainEngine)
 		BG_PALETTE[255] = color;
@@ -68,13 +68,13 @@ void F_Console::SetColor(u16 color)
 		BG_PALETTE_SUB[255] = color;
 }
 
-void F_Console::SetCursorXY(int x, int y)
+void FConsole::SetCursorXY(int x, int y)
 {
 	printConsole.cursorX = x;
 	printConsole.cursorY = y;
 }
 
-void F_Console::SetWindow(int x, int y, int width, int height)
+void FConsole::SetWindow(int x, int y, int width, int height)
 {
 	printConsole.cursorX = 0;
 	printConsole.cursorY = 0;
@@ -84,22 +84,22 @@ void F_Console::SetWindow(int x, int y, int width, int height)
 	printConsole.windowHeight = height;
 }
 
-int F_Console::GetCursorX()
+int FConsole::GetCursorX()
 {
 	return printConsole.cursorX;
 }
 
-int F_Console::GetCursorY()
+int FConsole::GetCursorY()
 {
 	return printConsole.cursorY;
 }
 
-int F_Console::GetWindowWidth()
+int FConsole::GetWindowWidth()
 {
 	return printConsole.windowWidth;
 }
 
-int F_Console::GetWindowHeight()
+int FConsole::GetWindowHeight()
 {
 	return printConsole.windowHeight;
 }

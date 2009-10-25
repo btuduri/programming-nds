@@ -1,6 +1,6 @@
 #include "FLib.h"
 
-F_Sprite::F_Sprite(u8* gfx, int width, int height, int framesCount)
+FSprite::FSprite(u8* gfx, int width, int height, int framesCount)
 {
 	this->gfx = gfx;
 	this->framesCount = framesCount;
@@ -50,7 +50,7 @@ F_Sprite::F_Sprite(u8* gfx, int width, int height, int framesCount)
 	}
 }
 
-void F_Sprite::Load(bool main, int id)
+void FSprite::Load(bool main, int id)
 {
 	// Inicializa Sprite
 	OamState *oam = main ? &oamMain : &oamSub;
@@ -66,10 +66,10 @@ void F_Sprite::Load(bool main, int id)
 	}
 
 	// Inicializa atributos do Sprite
-	oamSet(oam, id, 0, 0, 0, 0, ss, SpriteColorFormat_256Color, frames[0], 0, false, false, false, false, false);
+	oamSet(oam, id, x, y, 0, 0, ss, SpriteColorFormat_256Color, frames[0], 0, false, false, false, false, false);
 }
 
-void F_Sprite::SetXY(int x, int y)
+void FSprite::SetXY(int x, int y)
 {
 	this->x = x - middle_x;
 	this->y = y - middle_y;
@@ -80,7 +80,7 @@ void F_Sprite::SetXY(int x, int y)
 	}
 }
 
-void F_Sprite::SetXYCorner(int x, int y)
+void FSprite::SetXYCorner(int x, int y)
 {
 	this->x = x;
 	this->y = y;
@@ -91,7 +91,7 @@ void F_Sprite::SetXYCorner(int x, int y)
 	}
 }
 
-void F_Sprite::Center()
+void FSprite::Center()
 {
 	x = 128 - middle_x;
 	y = 96 - middle_y;
@@ -102,20 +102,20 @@ void F_Sprite::Center()
 	}
 }
 
-void F_Sprite::Show()
+void FSprite::Show()
 {
 	visible = true;
 	se->x = x;
 	se->y = y;
 }
 
-void F_Sprite::Hide()
+void FSprite::Hide()
 {
 	visible = false;
 	se->x = 0 - width;
 }
 
-void F_Sprite::AddFrame()
+void FSprite::AddFrame()
 {
 	currentFrame++;
 	if (currentFrame == framesCount)
