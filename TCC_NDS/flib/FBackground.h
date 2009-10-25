@@ -2,7 +2,7 @@
 
 #include "FLib.h"
 
-class F_Background
+class FBackground
 {
 	int id;
 	int layer;
@@ -19,7 +19,7 @@ class F_Background
 	bool alternate_x, alternate_y;
 
 public:
-	F_Background(const void* tilemap, int width, int height);
+	FBackground(const void* tilemap, int width, int height);
 	void Load(bool mainEngine, int layer, int init_x, int init_y);
 	void Scroll(int offset_x, int offset_y);
 	void InfiniteScroll(int offset_x, int offset_y);

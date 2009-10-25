@@ -1,6 +1,6 @@
 #include "FLib.h"
 
-F_Background::F_Background(const void* tilemap, int width, int height)
+FBackground::FBackground(const void* tilemap, int width, int height)
 {
 	this->width = width;
 	this->height = height;
@@ -16,7 +16,7 @@ F_Background::F_Background(const void* tilemap, int width, int height)
 
 ///////////////////////////////////////////////////////////////////////////////
 
-void F_Background::Load(bool mainEngine, int layer, int init_x, int init_y)
+void FBackground::Load(bool mainEngine, int layer, int init_x, int init_y)
 {
 	// Inicializa variáveis
 	// --------------------
@@ -86,7 +86,7 @@ void F_Background::Load(bool mainEngine, int layer, int init_x, int init_y)
 
 ///////////////////////////////////////////////////////////////////////////////
 
-void F_Background::Scroll(int offset_x, int offset_y)
+void FBackground::Scroll(int offset_x, int offset_y)
 {
 	// Incrementa coordenadas
 	// ----------------------
@@ -158,7 +158,7 @@ void F_Background::Scroll(int offset_x, int offset_y)
 
 ///////////////////////////////////////////////////////////////////////////////
 
-void F_Background::InfiniteScroll(int offset_x, int offset_y)
+void FBackground::InfiniteScroll(int offset_x, int offset_y)
 {
 	screen_x += offset_x;
 	screen_y += offset_y;

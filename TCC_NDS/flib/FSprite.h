@@ -7,7 +7,7 @@
 #define ANIM_ONESHOT ANIM_LOOP, 1
 #define ANIM_INFINITE ANIM_LOOP, -1
 
-class F_Sprite
+class FSprite
 {
 	u8* gfx;
 	int framesCount;
@@ -26,7 +26,7 @@ class F_Sprite
 
 public:
 
-	F_Sprite(u8* gfx, int width, int height, int framesCount);
+	FSprite(u8* gfx, int width, int height, int framesCount);
 	void Load(bool main, int id);
 	void SetXY(int x, int y);
 	void SetXYCorner(int x, int y);

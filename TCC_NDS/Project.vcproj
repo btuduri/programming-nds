@@ -71,6 +71,10 @@
 				RelativePath=".\source\main.cpp"
 				>
 			</File>
+			<File
+				RelativePath=".\source\MainScene.cpp"
+				>
+			</File>
 			<Filter
 				Name="FLib"
 				>
@@ -87,7 +91,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\flib\source\FMain.cpp"
+					RelativePath=".\flib\source\FLib.cpp"
 					>
 				</File>
 				<File
@@ -99,19 +103,19 @@
 					>
 				</File>
 				<File
-					RelativePath=".\flib\source\FPalette.cpp"
+					RelativePath=".\flib\source\FScene.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\flib\source\FScreen.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\flib\source\FSoundEffect.cpp"
+					RelativePath=".\flib\source\FSoundManager.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\flib\source\FSprite.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\flib\source\FVideoManager.cpp"
 					>
 				</File>
 			</Filter>
@@ -121,6 +125,10 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath=".\include\MainScene.h"
+				>
+			</File>
 			<Filter
 				Name="FLib"
 				>
@@ -141,31 +149,23 @@
 					>
 				</File>
 				<File
-					RelativePath=".\flib\FMain.h"
-					>
-				</File>
-				<File
 					RelativePath=".\flib\FMath.h"
 					>
 				</File>
 				<File
-					RelativePath=".\flib\FMusic.h"
+					RelativePath=".\flib\FScene.h"
 					>
 				</File>
 				<File
-					RelativePath=".\flib\FPalette.h"
-					>
-				</File>
-				<File
-					RelativePath=".\flib\FScreen.h"
-					>
-				</File>
-				<File
-					RelativePath=".\flib\FSoundEffect.h"
+					RelativePath=".\flib\FSoundManager.h"
 					>
 				</File>
 				<File
 					RelativePath=".\flib\FSprite.h"
+					>
+				</File>
+				<File
+					RelativePath=".\flib\FVideoManager.h"
 					>
 				</File>
 			</Filter>
