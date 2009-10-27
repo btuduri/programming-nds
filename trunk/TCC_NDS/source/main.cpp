@@ -15,10 +15,10 @@ int main(void)
 	MainScene* s = new MainScene(im);
 	me->SetScene(s);
 
-	FConsole *sc = se->GetConsole();
-	sc->SetWindow(5, 5, 16, 3);
-	sc->Print("Hello world diretamente da engine secundaria...", 20);
-	
+	me->FadeOut(30);
+	flib->Wait(10);
+	me->FadeIn(30);
+
 	while(true)
 		flib->Update();
 }

@@ -24,5 +24,6 @@ public:
 
 	FInputManager* GetInputManager();
 	FVideoManager* GetVideoManager();
-	void Update();	
+	void Update();
+	void Wait(int time);
 };

@@ -87,6 +87,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\flib\source\FEngine.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\flib\source\FInputManager.cpp"
 					>
 				</File>
@@ -100,6 +104,10 @@
 				</File>
 				<File
 					RelativePath=".\flib\source\FMusic.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\flib\source\FPalette.cpp"
 					>
 				</File>
 				<File
@@ -141,6 +149,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\flib\FEngine.h"
+					>
+				</File>
+				<File
 					RelativePath=".\flib\FInputManager.h"
 					>
 				</File>
@@ -150,6 +162,10 @@
 				</File>
 				<File
 					RelativePath=".\flib\FMath.h"
+					>
+				</File>
+				<File
+					RelativePath=".\flib\FPalette.h"
 					>
 				</File>
 				<File
