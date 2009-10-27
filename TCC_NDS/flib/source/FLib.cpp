@@ -24,3 +24,9 @@ void FLib::Update()
 	inputManager->Update();
 	videoManager->Update();
 }
+
+void FLib::Wait(int time)
+{
+	while (time-- > 0)
+		swiWaitForVBlank();
+}
