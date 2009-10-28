@@ -1,3 +1,4 @@
+#include <cstdarg>
 #include "FLib.h"
 
 FConsole::FConsole(bool mainEngine)
@@ -6,22 +7,26 @@ FConsole::FConsole(bool mainEngine)
 	consoleInit(&printConsole, mainEngine ? 1 : 0, BgType_Text4bpp, BgSize_T_256x256, 4, 2, mainEngine, true);
 }
 
-void FConsole::Print(const char* text)
+void FConsole::Print(const char* text, ...)
 {
+	va_list args;
 	consoleSelect(&printConsole);
-	printf(text);
+	printf(text, args);
 }
 
-void FConsole::Print(const char* text, int time)
+void FConsole::Type(const char* text, int time, ...)
 {
+	va_list args;
 	consoleSelect(&printConsole);
 	consoleClear();	
 	
-	int textLen = strlen(text);
+	char* newText;
+	sprintf(newText, text, args);
+	int textLen = strlen(newText);
 	char* textTemp = (char*)malloc(sizeof(char)*textLen);
 	for (int textSize = 0; textSize < textLen; textSize++)
 	{
-		textTemp[textSize] = text[textSize];
+		textTemp[textSize] = newText[textSize];
 		textTemp[textSize+1] = '\0';
 
 		printConsole.cursorX = 0;

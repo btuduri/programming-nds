@@ -4,7 +4,7 @@ FLib::FLib()
 {
 	mmInitDefaultMem((mm_addr)soundbank_bin);
 	inputManager = new FInputManager();
-	videoManager = new FVideoManager();
+	videoManager = new FVideoManager(inputManager);
 }
 
 FInputManager* FLib::GetInputManager()
