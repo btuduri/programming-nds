@@ -1,7 +1,9 @@
 #include "FLib.h"
 
-FEngine::FEngine(bool mainEngine)
+FEngine::FEngine(bool mainEngine, FInputManager* im, FVideoManager* vm)
 {
+	this->im = im;
+	this->vm = vm;
 	this->mainEngine = mainEngine;
 	console = new FConsole(mainEngine);
 	if (mainEngine)
@@ -42,7 +44,9 @@ void FEngine::AddTileset(const void* tileset, int tilesetLen)
 void FEngine::SetScene(FScene* scene)
 {
 	this->scene = scene;
-	scene->Load(mainEngine);
+	scene->Load(mainEngine, this, im, vm);
+	scene->Load();
+	oamUpdate(mainEngine ? &oamMain : &oamSub);
 }
 
 void FEngine::Update()
@@ -53,19 +57,19 @@ void FEngine::Update()
 
 void FEngine::Hide()
 {
-	setBrightness(mainEngine, -16);
+	setBrightness(mainEngine ? 1 : 2, -16);
 }
 
 void FEngine::Show()
 {
-	setBrightness(mainEngine, 0);
+	setBrightness(mainEngine ? 1 : 2, 0);
 }
 
 void FEngine::FadeIn(int time)
 {
 	for (int i = -16; i <= 0; i++)
 	{
-		setBrightness(mainEngine, i);
+		setBrightness(mainEngine ? 1 : 2, i);
 		for (int j = 0; j < time; j++)
 			swiWaitForVBlank();
 	}
@@ -75,7 +79,7 @@ void FEngine::FadeOut(int time)
 {
 	for (int i = 0; i >= -16; i--)
 	{
-		setBrightness(mainEngine, i);
+		setBrightness(mainEngine ? 1 : 2, i);
 		for (int j = 0; j < time; j++)
 			swiWaitForVBlank();
 	}

@@ -6,7 +6,6 @@
 
 class MainScene : public FScene
 {
-	FInputManager* im;
 	FBackground* bg;
 	FSprite* sp;
 	float squareRot;
@@ -15,6 +14,6 @@ class MainScene : public FScene
 	void DrawGLScene();
 
 public:
-	MainScene(FInputManager* im);
+	virtual void Load();
 	virtual void Update();
 };

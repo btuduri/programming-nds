@@ -10,8 +10,8 @@ class FConsole
 public:
 	FConsole(bool mainEngine);
 
-	void Print(const char* text);
-	void Print(const char* text, int time);
+	void Print(const char* text, ...);
+	void Type(const char* text, int time, ...);
 	void Clear();
 	void ClearScreen();
 

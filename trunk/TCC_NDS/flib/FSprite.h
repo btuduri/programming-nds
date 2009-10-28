@@ -15,7 +15,7 @@ class FSprite
 	int size;
 	int x, y, width;
 	int middle_x, middle_y;
-	bool visible;
+	bool visible, mainEngine;
 
 	int currentFrame;
 	int animationFrame;
@@ -34,4 +34,6 @@ public:
 	void Show();
 	void Hide();
 	void AddFrame();
+	void SetRotateId(int id);
+	void Rotate(int angle);
 };

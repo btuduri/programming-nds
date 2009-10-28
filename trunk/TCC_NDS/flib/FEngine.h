@@ -2,6 +2,8 @@
 
 #include "FLib.h"
 
+class FVideoManager;
+
 class FEngine
 {
 	bool mainEngine;
@@ -9,9 +11,11 @@ class FEngine
 	FPalette* spPalette;
 	FConsole* console;
 	FScene* scene;
+	FInputManager* im;
+	FVideoManager* vm;
 
 public:
-	FEngine(bool mainEngine);
+	FEngine(bool mainEngine, FInputManager* im, FVideoManager* vm);
 
 	FPalette* GetBgPalette();
 	FPalette* GetSpPalette();

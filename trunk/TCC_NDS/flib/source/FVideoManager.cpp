@@ -1,7 +1,8 @@
 #include "FLib.h"
 
-FVideoManager::FVideoManager()
+FVideoManager::FVideoManager(FInputManager* im)
 {
+	this->im = im;
 	// Inicializa Gráfico
 	videoSetMode(MODE_0_2D);
 	videoSetModeSub(MODE_0_2D);
@@ -16,8 +17,8 @@ FVideoManager::FVideoManager()
 	oamInit(&oamMain, SpriteMapping_1D_32, false);
 	oamInit(&oamSub, SpriteMapping_1D_32, false);
 
-	this->mainEngine = new FEngine(true);
-	this->subEngine = new FEngine(false);
+	this->mainEngine = new FEngine(true, im, this);
+	this->subEngine = new FEngine(false, im, this);
 }
 
 FEngine* FVideoManager::GetMainEngine()
@@ -34,6 +35,7 @@ void FVideoManager::Enable3D()
 {
 	// Inicializa Gráfico
 	videoSetMode(MODE_0_3D);
+	oamInit(&oamMain, SpriteMapping_1D_32, false);
 
 	// Inicializa Opengl
 	glInit();
@@ -57,4 +59,39 @@ void FVideoManager::Update()
 	oamUpdate(&oamSub);
 	
 	glFlush(0);
+}
+
+void FVideoManager::Hide()
+{
+	setBrightness(3, -16);
+}
+
+void FVideoManager::Show()
+{
+	setBrightness(3, 0);
+}
+
+void FVideoManager::FadeIn(int time)
+{
+	for (int i = -16; i <= 0; i++)
+	{
+		setBrightness(3, i);
+		for (int j = 0; j < time; j++)
+			swiWaitForVBlank();
+	}
+}
+
+void FVideoManager::FadeOut(int time)
+{
+	for (int i = 0; i >= -16; i--)
+	{
+		setBrightness(3, i);
+		for (int j = 0; j < time; j++)
+			swiWaitForVBlank();
+	}
+}
+
+void FVideoManager::SwapScreens()
+{
+	lcdSwap();
 }

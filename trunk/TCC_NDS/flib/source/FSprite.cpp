@@ -52,6 +52,7 @@ FSprite::FSprite(u8* gfx, int width, int height, int framesCount)
 
 void FSprite::Load(bool main, int id)
 {
+	mainEngine = main;
 	// Inicializa Sprite
 	OamState *oam = main ? &oamMain : &oamSub;
 	se = &(oam->oamMemory[id]);
@@ -121,4 +122,15 @@ void FSprite::AddFrame()
 	if (currentFrame == framesCount)
 		currentFrame = 0;
 	se->gfxIndex = oamGfxPtrToOffset(frames[currentFrame]);
+}
+
+void FSprite::SetRotateId(int id)
+{
+	se->rotationIndex = id;
+}
+
+void FSprite::Rotate(int angle)
+{
+	OamState *oam = mainEngine ? &oamMain : &oamSub;
+	oamRotateScale(oam, se->rotationIndex, angle, 1<<8, 1<<8);
 }

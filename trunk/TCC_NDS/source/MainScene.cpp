@@ -1,14 +1,20 @@
 #include "MainScene.h"
 
-MainScene::MainScene(FInputManager* im)
+void MainScene::Load()
 {
-	this->im = im;
+	engine->GetBgPalette()->Load(backgroundsPal);
+	engine->GetSpPalette()->Load(spritesPal);
+	engine->AddTileset(backgroundTiles, backgroundTilesLen);
+
 	bg = new FBackground(backgroundMap, 4, 4);
 	sp = new FSprite((u8*)manTiles, 32, 32, 12);
 	sp->Center();
 
 	AddBackground(3, bg, 0, 0);
 	AddSprite(sp);
+
+	vm->FadeOut(20);
+	vm->FadeIn(20);
 }
 
 void MainScene::DrawGLScene()
@@ -114,6 +120,12 @@ void MainScene::Update()
 	else if (im->Pad.Y.Pressed)
 	{
 		sp->Show();
+	}
+
+	if (im->Stylus.Held)
+	{
+		int angle = (F_GetAngle(128, 96, im->Stylus.X, im->Stylus.Y) * 65534) >> 10;
+		sp->Rotate(angle);
 	}
 
 	DrawGLScene();
