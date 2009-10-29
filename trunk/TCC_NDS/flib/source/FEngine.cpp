@@ -47,6 +47,7 @@ void FEngine::SetScene(FScene* scene)
 	scene->Load(mainEngine, this, im, vm);
 	scene->Load();
 	oamUpdate(mainEngine ? &oamMain : &oamSub);
+	bgUpdate();
 }
 
 void FEngine::Update()
