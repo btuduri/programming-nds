@@ -20,6 +20,7 @@ class FBackground
 
 public:
 	FBackground(const void* tilemap, int width, int height);
+	~FBackground();
 	void Load(bool mainEngine, int layer, int init_x, int init_y);
 	void Scroll(int offset_x, int offset_y);
 	void InfiniteScroll(int offset_x, int offset_y);
