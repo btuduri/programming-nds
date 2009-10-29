@@ -1,5 +1,16 @@
 #include "FLib.h"
 
+FScene::~FScene()
+{
+	for (int i = 0; i < 4; i++)
+		if (backgrounds[i])
+			delete backgrounds[i];
+
+	for (int i = 0; i < SPRITE_COUNT; i++)
+		if (sprites[i])
+			delete sprites[i];
+}
+
 void FScene::AddBackground(int layer, FBackground *background, int init_x, int init_y)
 {
 	backgrounds[layer] = background;
