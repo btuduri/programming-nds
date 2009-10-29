@@ -2,7 +2,7 @@
 
 void MainScene::Load()
 {
-	engine->GetBgPalette()->Load(backgroundsPal);
+	/*engine->GetBgPalette()->Load(backgroundsPal);
 	engine->GetSpPalette()->Load(spritesPal);
 	engine->AddTileset(backgroundTiles, backgroundTilesLen);
 
@@ -14,7 +14,7 @@ void MainScene::Load()
 	AddSprite(sp);
 
 	vm->FadeOut(20);
-	vm->FadeIn(20);
+	vm->FadeIn(20);*/
 }
 
 void MainScene::DrawGLScene()
@@ -91,7 +91,7 @@ void MainScene::DrawGLScene()
 
 void MainScene::Update()
 {
-	if (im->Pad.Right.Held)
+	/*if (im->Pad.Right.Held)
 	{
 		bg->Scroll(4, 0);
 	}
@@ -126,7 +126,7 @@ void MainScene::Update()
 	{
 		int angle = (F_GetAngle(128, 96, im->Stylus.X, im->Stylus.Y) * 65534) >> 10;
 		sp->Rotate(angle);
-	}
+	}*/
 
 	DrawGLScene();
 	squareRot += 0.75f;
