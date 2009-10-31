@@ -64,7 +64,7 @@ void FEngine::AddTileset(const void* tileset, int tilesetLen)
 void FEngine::SetScene(FScene* scene)
 {
 	if (this->scene)
-		delete scene;
+		delete this->scene;
 	this->scene = scene;
 	scene->Load(mainEngine, this, im, vm);
 	scene->Load();
