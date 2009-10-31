@@ -103,10 +103,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\flib\source\FMusic.cpp"
-					>
-				</File>
-				<File
 					RelativePath=".\flib\source\FPalette.cpp"
 					>
 				</File>
