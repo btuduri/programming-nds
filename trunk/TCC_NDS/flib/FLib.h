@@ -20,7 +20,7 @@ class FLib
 	FVideoManager* videoManager;
 
 public:
-	FLib();
+	FLib(bool is3D);
 
 	FInputManager* GetInputManager();
 	FVideoManager* GetVideoManager();

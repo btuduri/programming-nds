@@ -1,6 +1,6 @@
 #include "FLib.h"
 
-FVideoManager::FVideoManager(FInputManager* im)
+FVideoManager::FVideoManager(FInputManager* im, bool is3D)
 {
 	this->im = im;
 	// Inicializa Gráfico
@@ -12,6 +12,22 @@ FVideoManager::FVideoManager(FInputManager* im)
 	vramSetBankB(VRAM_B_MAIN_SPRITE_0x06400000);
 	vramSetBankC(VRAM_C_SUB_BG);
 	vramSetBankD(VRAM_D_SUB_SPRITE);
+
+	// Habilita o modo 3D
+	if (is3D)
+	{
+		videoSetMode(MODE_0_3D);
+		
+		// Inicializa Opengl
+		glInit();
+		glClearColor(0, 0, 0, 0);
+		glPolyFmt(POLY_ALPHA(31) | POLY_CULL_NONE);
+		glViewport(0, 0, 255, 191);
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		gluPerspective(70, 256.0 / 192.0, 0.1, 100);	
+		glMatrixMode(GL_MODELVIEW);
+	}
 
 	// Inicializa Sprites
 	oamInit(&oamMain, SpriteMapping_1D_32, false);
@@ -37,27 +53,6 @@ FEngine* FVideoManager::GetMainEngine()
 FEngine* FVideoManager::GetSubEngine()
 {
 	return subEngine;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////////////////
-
-void FVideoManager::Enable3D()
-{
-	// Inicializa Gráfico
-	videoSetMode(MODE_0_3D);
-	oamInit(&oamMain, SpriteMapping_1D_32, false);
-
-	// Inicializa Opengl
-	glInit();
-	glClearColor(0, 0, 0, 0);
-	glPolyFmt(POLY_ALPHA(31) | POLY_CULL_NONE);
-	glViewport(0, 0, 255, 191);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluPerspective(70, 256.0 / 192.0, 0.1, 100);	
-	glMatrixMode(GL_MODELVIEW);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
