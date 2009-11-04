@@ -7,6 +7,7 @@ class FBackground
 	int id;
 	int layer;
 	bool mainEngine;
+	bool is16c;
 
 	u16 *tilemap;
 	int map_base;
@@ -19,7 +20,7 @@ class FBackground
 	bool alternate_x, alternate_y;
 
 public:
-	FBackground(const void* tilemap, int width, int height);
+	FBackground(const void* tilemap, int width, int height, bool is16c);
 	~FBackground();
 	void Load(bool mainEngine, int layer, int init_x, int init_y);
 	void Scroll(int offset_x, int offset_y);
