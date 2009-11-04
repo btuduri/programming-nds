@@ -16,11 +16,10 @@ class FVideoManager
 	FInputManager* im;
 
 public:
-	FVideoManager(FInputManager* im);
+	FVideoManager(FInputManager* im, bool is3D);
 
 	FEngine* GetMainEngine();
 	FEngine* GetSubEngine();
-	void Enable3D();
 	void Update();
 	void Hide();
 	void Show();

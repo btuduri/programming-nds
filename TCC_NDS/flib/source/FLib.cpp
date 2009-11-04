@@ -1,10 +1,10 @@
 #include "FLib.h"
 
-FLib::FLib()
+FLib::FLib(bool is3D)
 {
 	mmInitDefaultMem((mm_addr)soundbank_bin);
 	inputManager = new FInputManager();
-	videoManager = new FVideoManager(inputManager);
+	videoManager = new FVideoManager(inputManager, is3D);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

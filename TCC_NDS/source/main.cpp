@@ -3,20 +3,18 @@
 
 int main(void)
 {
-	FLib* flib = new FLib();
-	FEngine* me = flib->GetVideoManager()->GetMainEngine();
-	FEngine* se = flib->GetVideoManager()->GetSubEngine();
-	flib->GetVideoManager()->Enable3D();
+	FLib* flib = new FLib(true);
 	
-	MainScene* s1 = new MainScene();
-	me->SetScene(s1);
+	flib->GetVideoManager()->Hide();
+	flib->GetVideoManager()->GetMainEngine()->SetScene(new MainScene());
+	flib->GetVideoManager()->GetSubEngine()->SetScene(new MainScene());
+	flib->GetVideoManager()->FadeIn(20);
 
-	//MainScene* s2 = new MainScene();
-	//se->SetScene(s2);
+	flib->GetVideoManager()->GetMainEngine()->GetConsole()->Type("Thiago Auler dos Santos\n", 5);
+	flib->GetVideoManager()->GetMainEngine()->GetConsole()->Type("Thiago Auler dos Santos\n", 5);
+	flib->GetVideoManager()->GetSubEngine()->GetConsole()->Type("Thiago Auler dos Santos\n", 5);
+	flib->GetVideoManager()->GetSubEngine()->GetConsole()->Type("Thiago Auler dos Santos\n", 5);
 
 	while(true)
-	{
 		flib->Update();
-		flib->GetVideoManager()->SwapScreens();
-	}
 }

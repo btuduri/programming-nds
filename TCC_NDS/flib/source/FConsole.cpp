@@ -44,6 +44,9 @@ void FConsole::Type(const char* text, int time, ...)
 		for (int wait = 0; wait < time; wait++)
 			swiWaitForVBlank();
 	}
+
+	free(newText);
+	free(textTemp);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
