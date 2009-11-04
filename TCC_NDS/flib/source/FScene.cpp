@@ -30,7 +30,10 @@ void FScene::AddBackground(int layer, FBackground *background, int init_x, int i
 void FScene::ClearBackground(int layer)
 {
 	if (backgrounds[layer])
+	{
 		delete backgrounds[layer];
+		backgrounds[layer] = NULL;
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
