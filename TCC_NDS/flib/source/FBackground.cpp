@@ -1,11 +1,10 @@
 #include "FLib.h"
 
-FBackground::FBackground(const void* tilemap, int width, int height, bool is16c)
+FBackground::FBackground(const void* tilemap, int width, int height)
 {
 	this->width = width;
 	this->height = height;
 	this->tilemap = (u16*)tilemap;
-	this->is16c = is16c;
 
 	screen_x = screen_y = 0;
 	limit_x = width * 256 - 256;
@@ -75,9 +74,9 @@ void FBackground::Load(bool mainEngine, int layer, int init_x, int init_y)
 			size = BgSize_T_512x512;
 
 	if (mainEngine)
-		id = bgInit(layer, is16c ? BgType_Text4bpp : BgType_Text8bpp, size, ram_base, 3);
+		id = bgInit(layer, BgType_Text8bpp, size, ram_base, 3);
 	else
-		id = bgInitSub(layer, is16c ? BgType_Text4bpp : BgType_Text8bpp, size, ram_base, 3);
+		id = bgInitSub(layer, BgType_Text8bpp, size, ram_base, 3);
 
 	// Copia mapas de memória
 	// ----------------------
