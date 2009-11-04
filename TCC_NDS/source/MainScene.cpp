@@ -6,7 +6,7 @@ void MainScene::Load()
 	engine->GetSpPalette()->Load(spritesPal);
 	engine->AddTileset(backgroundTiles, backgroundTilesLen);
 
-	bg = new FBackground(backgroundMap, 4, 4);
+	bg = new FBackground(backgroundMap, 4, 4, false);
 	sp = new FSprite((u8*)manTiles, 32, 32, 12);
 	sp->Center();
 
