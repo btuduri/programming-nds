@@ -44,11 +44,15 @@ void FBackground::Load(bool mainEngine, int layer, int init_x, int init_y)
 	if (bitmapMode)
 	{
 		if (mainEngine)
-			id = bgInit(layer, BgType_Bmp8, BgSize_B8_256x256, 0, 0);
+		{
+			dmaCopy(&tilemap[init_y * 256 + init_x], BG_TILE_RAM(3), 49152);
+			id = bgInit(3, BgType_Bmp8, BgSize_B8_256x256, 3, 0);
+		}
 		else
-			id = bgInitSub(layer, BgType_Bmp8, BgSize_B8_256x256, 0, 0);
-
-		dmaCopy(tilemap, BgMapRam(0), 49152);
+		{
+			dmaCopy(&tilemap[init_y * 256 + init_x], BG_TILE_RAM_SUB(3), 49152);
+			id = bgInitSub(3, BgType_Bmp8, BgSize_B8_256x256, 3, 0);
+		}
 	}
 	else
 	{
