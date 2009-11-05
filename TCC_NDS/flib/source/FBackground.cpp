@@ -48,7 +48,7 @@ void FBackground::Load(bool mainEngine, int layer, int init_x, int init_y)
 		else
 			id = bgInitSub(layer, BgType_Bmp8, BgSize_B8_256x256, 0, 0);
 
-		dmaCopy(tilemap, BgMapRam(0), 49152);
+		dmaCopy(tilemap, BgMapRam(0), 24576);//49152);
 	}
 	else
 	{
