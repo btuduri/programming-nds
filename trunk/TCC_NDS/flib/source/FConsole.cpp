@@ -1,10 +1,10 @@
 #include <cstdarg>
 #include "FLib.h"
 
-FConsole::FConsole(bool mainEngine)
+FConsole::FConsole(bool mainEngine, bool is3D)
 {
 	this->mainEngine = mainEngine;
-	consoleInit(&printConsole, mainEngine ? 1 : 0, BgType_Text4bpp, BgSize_T_256x256, 4, 2, mainEngine, true);
+	consoleInit(&printConsole, (mainEngine && is3D) ? 1 : 0, BgType_Text4bpp, BgSize_T_256x256, 4, 2, mainEngine, true);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

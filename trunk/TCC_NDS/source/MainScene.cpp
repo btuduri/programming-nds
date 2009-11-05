@@ -10,7 +10,7 @@ void MainScene::Load()
 	sp = new FSprite((u8*)manTiles, 32, 32, 12);
 	sp->Center();
 
-	AddBackground(3, bg, 0, 0);
+	AddBackground(2, bg, 0, 0);
 	AddSprite(sp);
 }
 

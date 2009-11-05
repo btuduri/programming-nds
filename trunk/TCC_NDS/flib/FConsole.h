@@ -8,7 +8,7 @@ class FConsole
 	bool mainEngine;
 
 public:
-	FConsole(bool mainEngine);
+	FConsole(bool mainEngine, bool is3D);
 
 	void Print(const char* text, ...);
 	void Type(const char* text, int time, ...);

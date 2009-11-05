@@ -15,7 +15,7 @@ class FEngine
 	FVideoManager* vm;
 
 public:
-	FEngine(bool mainEngine, FInputManager* im, FVideoManager* vm);
+	FEngine(bool mainEngine, FInputManager* im, FVideoManager* vm, bool is3D);
 
 	FPalette* GetBgPalette();
 	FPalette* GetSpPalette();

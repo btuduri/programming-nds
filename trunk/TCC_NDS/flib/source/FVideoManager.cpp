@@ -33,8 +33,8 @@ FVideoManager::FVideoManager(FInputManager* im, bool is3D)
 	oamInit(&oamMain, SpriteMapping_1D_32, false);
 	oamInit(&oamSub, SpriteMapping_1D_32, false);
 
-	this->mainEngine = new FEngine(true, im, this);
-	this->subEngine = new FEngine(false, im, this);
+	this->mainEngine = new FEngine(true, im, this, is3D);
+	this->subEngine = new FEngine(false, im, this, is3D);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
