@@ -3,7 +3,7 @@
 
 int main(void)
 {
-	FLib* flib = new FLib(true);
+	FLib* flib = new FLib(false);
 	
 	flib->GetVideoManager()->Hide();
 	flib->GetVideoManager()->GetMainEngine()->SetScene(new MainScene());

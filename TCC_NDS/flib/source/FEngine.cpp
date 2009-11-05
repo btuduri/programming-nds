@@ -1,11 +1,11 @@
 #include "FLib.h"
 
-FEngine::FEngine(bool mainEngine, FInputManager* im, FVideoManager* vm)
+FEngine::FEngine(bool mainEngine, FInputManager* im, FVideoManager* vm, bool is3D)
 {
 	this->im = im;
 	this->vm = vm;
 	this->mainEngine = mainEngine;
-	console = new FConsole(mainEngine);
+	console = new FConsole(mainEngine, is3D);
 	if (mainEngine)
 	{
 		bgPalette = new FPalette(BG_PALETTE);
