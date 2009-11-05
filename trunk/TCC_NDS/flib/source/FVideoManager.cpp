@@ -4,8 +4,8 @@ FVideoManager::FVideoManager(FInputManager* im, bool is3D)
 {
 	this->im = im;
 	// Inicializa Gráfico
-	videoSetMode(MODE_0_2D);
-	videoSetModeSub(MODE_0_2D);
+	videoSetMode(MODE_3_2D);
+	videoSetModeSub(MODE_3_2D);
 
 	// Inicializa Memória
 	vramSetBankA(VRAM_A_MAIN_BG);
@@ -16,7 +16,7 @@ FVideoManager::FVideoManager(FInputManager* im, bool is3D)
 	// Habilita o modo 3D
 	if (is3D)
 	{
-		videoSetMode(MODE_0_3D);
+		videoSetMode(MODE_3_3D);
 		
 		// Inicializa Opengl
 		glInit();
