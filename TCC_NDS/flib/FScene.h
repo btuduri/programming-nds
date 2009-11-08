@@ -18,7 +18,7 @@ protected:
 	FVideoManager* vm;
 	
 public:
-	~FScene();
+	//~FScene();
 	void AddBackground(int layer, FBackground *background, int init_x, int init_y);
 	void ClearBackground(int layer);
 	void AddSprite(FSprite *sprite);

@@ -11,30 +11,30 @@ FConsole::FConsole(bool mainEngine, bool is3D)
 
 ///////////////////////////////////////////////////////////////////////////////
 
-void FConsole::Print(const char* text, ...)
+void FConsole::Print(const char* text)
 {
-	va_list args;
+	//va_list args;
 	consoleSelect(&printConsole);
-	printf(text, args);
+	printf(text);//, args);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////
 
-void FConsole::Type(const char* text, int time, ...)
+void FConsole::Type(const char* text, int time)
 {
-	va_list args;
+	//va_list args;
 	consoleSelect(&printConsole);
 	consoleClear();	
 	
-	char* newText;
-	sprintf(newText, text, args);
-	int textLen = strlen(newText);
+	//char* newText;
+	//sprintf(newText, text, args);
+	int textLen = strlen(text);//newText);
 	char* textTemp = (char*)malloc(sizeof(char)*textLen);
 	for (int textSize = 0; textSize < textLen; textSize++)
 	{
-		textTemp[textSize] = newText[textSize];
+		textTemp[textSize] = text[textSize]; //newText[textSize];
 		textTemp[textSize+1] = '\0';
 
 		printConsole.cursorX = 0;
@@ -45,7 +45,7 @@ void FConsole::Type(const char* text, int time, ...)
 			swiWaitForVBlank();
 	}
 
-	free(newText);
+	//free(newText);
 	free(textTemp);
 }
 
@@ -118,40 +118,4 @@ void FConsole::SetWindow(int x, int y, int width, int height)
 	printConsole.windowY = y;
 	printConsole.windowWidth = width;
 	printConsole.windowHeight = height;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////////////////
-
-int FConsole::GetCursorX()
-{
-	return printConsole.cursorX;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////////////////
-
-int FConsole::GetCursorY()
-{
-	return printConsole.cursorY;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////////////////
-
-int FConsole::GetWindowWidth()
-{
-	return printConsole.windowWidth;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////////////////
-
-int FConsole::GetWindowHeight()
-{
-	return printConsole.windowHeight;
 }
