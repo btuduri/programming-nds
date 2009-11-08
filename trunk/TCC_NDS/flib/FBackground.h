@@ -22,12 +22,13 @@ class FBackground
 public:
 	FBackground(const void* tilemap, int width, int height);
 	FBackground(const void* bitmap);
-	~FBackground();
+	//~FBackground();
 	void Load(bool mainEngine, int layer, int init_x, int init_y);
 	void Scroll(int offset_x, int offset_y);
 	void InfiniteScroll(int offset_x, int offset_y);
 	void FadeIn();
 	void FadeOut();
+	void Hide();
 
 private:
 	int Offset(int i) { return i * 1024; }
