@@ -10,7 +10,7 @@ FSprite::FSprite(u8* gfx, int width, int height, int framesCount)
 	middle_x = width >> 1;
 	middle_y = height >> 1;
 	this->width = width;
-	visible = true;
+	visible = false;
 
 	if (width == 8)
 	{
@@ -72,6 +72,7 @@ void FSprite::Load(bool main, int id)
 
 	// Inicializa atributos do Sprite
 	oamSet(oam, id, x, y, 0, 0, ss, SpriteColorFormat_256Color, frames[0], 0, false, false, false, false, false);
+	visible = true;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
