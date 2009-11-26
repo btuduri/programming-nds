@@ -11,7 +11,8 @@ class FSprite
 {
 	u8* gfx;
 	int framesCount;
-	u16** frames;
+	//u16** frames;
+	u16* frame;
 	int size;
 	int x, y, width;
 	int middle_x, middle_y;
@@ -33,6 +34,7 @@ public:
 	void Center();
 	void Show();
 	void Hide();
+	void Remove();
 	void AddFrame();
 	void SetRotateId(int id);
 	void Rotate(int angle);

@@ -32,6 +32,7 @@ FVideoManager::FVideoManager(FInputManager* im, bool is3D)
 	// Inicializa Sprites
 	oamInit(&oamMain, SpriteMapping_1D_32, false);
 	oamInit(&oamSub, SpriteMapping_1D_32, false);
+	oamAllocateGfx(&oamSub, SpriteSize_8x8, SpriteColorFormat_16Color);
 
 	this->mainEngine = new FEngine(true, im, this, is3D);
 	this->subEngine = new FEngine(false, im, this, is3D);

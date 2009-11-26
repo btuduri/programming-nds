@@ -62,16 +62,20 @@ void FSprite::Load(bool main, int id)
 	se = &(oam->oamMemory[id]);
 
 	// Carrega frames para a memória
-	frames = (u16**)malloc(sizeof(u16*)*framesCount);
-	for (int i = 0; i < framesCount; i++)
-	{
-		frames[i] = oamAllocateGfx(oam, ss, SpriteColorFormat_256Color);
-		dmaCopy(gfx, frames[i], size);
-		gfx += size;
-	}
+	//frames = (u16**)malloc(sizeof(u16*)*framesCount);
+	//for (int i = 0; i < framesCount; i++)
+	//{
+	//	frames[i] = oamAllocateGfx(oam, ss, SpriteColorFormat_256Color);
+	//	dmaCopy(gfx, frames[i], size);
+	//	gfx += size;
+	//}
+
+	frame = oamAllocateGfx(oam, ss, SpriteColorFormat_256Color);
+	dmaCopy(gfx, frame, size);
 
 	// Inicializa atributos do Sprite
-	oamSet(oam, id, x, y, 0, 0, ss, SpriteColorFormat_256Color, frames[0], 0, false, false, false, false, false);
+	//oamSet(oam, id, x, y, 0, 0, ss, SpriteColorFormat_256Color, frames[0], 0, false, false, false, false, false);
+	oamSet(oam, id, x, y, 0, 0, ss, SpriteColorFormat_256Color, frame, 0, false, false, false, false, false);
 	visible = true;
 }
 
@@ -145,12 +149,23 @@ void FSprite::Hide()
 
 ///////////////////////////////////////////////////////////////////////////////
 
+void FSprite::Remove()
+{
+	OamState *oam = mainEngine ? &oamMain : &oamSub;
+	oamFreeGfx(oam, frame);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////
+
 void FSprite::AddFrame()
 {
 	currentFrame++;
 	if (currentFrame == framesCount)
 		currentFrame = 0;
-	se->gfxIndex = oamGfxPtrToOffset(frames[currentFrame]);
+	
+	dmaCopy(gfx + currentFrame * size, frame, size);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
