@@ -10,6 +10,7 @@ class MainScene : public FScene
 	FSprite* sp;
 	float squareRot;
 	float triangRot;
+	int frame;
 
 	void DrawGLScene();
 
