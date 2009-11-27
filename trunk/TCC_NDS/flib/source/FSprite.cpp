@@ -1,10 +1,8 @@
 #include "FLib.h"
 
-FSprite::FSprite(u8* gfx, int width, int height, int framesCount)
+FSprite::FSprite(u8* gfx, int width, int height)
 {
 	this->gfx = gfx;
-	this->framesCount = framesCount;
-	currentFrame = 0;
 	size = width * height;
 	x = y = 0;
 	middle_x = width >> 1;
@@ -61,20 +59,11 @@ void FSprite::Load(bool main, int id)
 	OamState *oam = main ? &oamMain : &oamSub;
 	se = &(oam->oamMemory[id]);
 
-	// Carrega frames para a memória
-	//frames = (u16**)malloc(sizeof(u16*)*framesCount);
-	//for (int i = 0; i < framesCount; i++)
-	//{
-	//	frames[i] = oamAllocateGfx(oam, ss, SpriteColorFormat_256Color);
-	//	dmaCopy(gfx, frames[i], size);
-	//	gfx += size;
-	//}
-
+	// Carrega frame para a memória
 	frame = oamAllocateGfx(oam, ss, SpriteColorFormat_256Color);
 	dmaCopy(gfx, frame, size);
 
 	// Inicializa atributos do Sprite
-	//oamSet(oam, id, x, y, 0, 0, ss, SpriteColorFormat_256Color, frames[0], 0, false, false, false, false, false);
 	oamSet(oam, id, x, y, 0, 0, ss, SpriteColorFormat_256Color, frame, 0, false, false, false, false, false);
 	visible = true;
 }
@@ -159,13 +148,9 @@ void FSprite::Remove()
 
 ///////////////////////////////////////////////////////////////////////////////
 
-void FSprite::AddFrame()
+void FSprite::SetFrame(int frame)
 {
-	currentFrame++;
-	if (currentFrame == framesCount)
-		currentFrame = 0;
-	
-	dmaCopy(gfx + currentFrame * size, frame, size);
+	dmaCopy(gfx + frame * size, this->frame, size);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -10,24 +10,18 @@
 class FSprite
 {
 	u8* gfx;
-	int framesCount;
-	//u16** frames;
 	u16* frame;
 	int size;
 	int x, y, width;
 	int middle_x, middle_y;
 	bool visible, mainEngine;
 
-	int currentFrame;
-	int animationFrame;
-	int framesPerAnimation;
-
 	SpriteSize ss;
 	SpriteEntry *se;
 
 public:
 
-	FSprite(u8* gfx, int width, int height, int framesCount);
+	FSprite(u8* gfx, int width, int height);
 	void Load(bool main, int id);
 	void SetXY(int x, int y);
 	void SetXYCorner(int x, int y);
@@ -35,7 +29,7 @@ public:
 	void Show();
 	void Hide();
 	void Remove();
-	void AddFrame();
+	void SetFrame(int frame);
 	void SetRotateId(int id);
 	void Rotate(int angle);
 };

@@ -7,11 +7,12 @@ void MainScene::Load()
 	engine->AddTileset(backgroundTiles, backgroundTilesLen);
 
 	bg = new FBackground(backgroundMap, 4, 4);
-	sp = new FSprite((u8*)manTiles, 32, 32, 12);
+	sp = new FSprite((u8*)manTiles, 32, 32);
 	sp->Center();
 
 	AddBackground(2, bg, 0, 0);
 	AddSprite(sp);
+	frame = 0;
 }
 
 void MainScene::DrawGLScene()
@@ -108,7 +109,8 @@ void MainScene::Update()
 
 	if (im->Pad.A.Pressed)
 	{
-		sp->AddFrame();
+		if (++frame = 12) frame = 0;
+		sp->SetFrame(frame);
 	}
 	else if (im->Pad.B.Pressed)
 	{
