@@ -29,6 +29,7 @@ public:
 	void FadeIn();
 	void FadeOut();
 	void Hide();
+	void Show();
 
 private:
 	int Offset(int i) { return i * 1024; }
