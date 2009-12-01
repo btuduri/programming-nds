@@ -1,16 +1,16 @@
-#include "MainScene.h"
+#include "main.h"
 
 void MainScene::Load()
 {
-	engine->GetBgPalette()->Load(backgroundsPal);
+	//engine->GetBgPalette()->Load(backgroundsPal);
 	engine->GetSpPalette()->Load(spritesPal);
-	engine->AddTileset(backgroundTiles, backgroundTilesLen);
+	//engine->AddTileset(backgroundTiles, backgroundTilesLen);
 
-	bg = new FBackground(backgroundMap, 4, 4);
+	//bg = new FBackground(backgroundMap, 4, 4);
 	sp = new FSprite((u8*)manTiles, 32, 32);
 	sp->Center();
 
-	AddBackground(2, bg, 0, 0);
+	//AddBackground(2, bg, 0, 0);
 	AddSprite(sp);
 	frame = 0;
 }
