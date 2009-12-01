@@ -1,0 +1,1 @@
+..\grit *.png -gB8 -gTFF00FF -pS -osprites -Ssprites -fa -ftc
