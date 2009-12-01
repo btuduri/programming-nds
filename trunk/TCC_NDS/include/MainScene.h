@@ -1,8 +1,6 @@
 #pragma once
 
-#include "FLib.h"
-#include "backgrounds.h"
-#include "sprites.h"
+#include "main.h"
 
 class MainScene : public FScene
 {
