@@ -2,16 +2,16 @@
 
 void MainScene::Load()
 {
-	//engine->GetBgPalette()->Load(backgroundsPal);
-	engine->GetSpPalette()->Load(spritesPal);
-	//engine->AddTileset(backgroundTiles, backgroundTilesLen);
+	engine->GetBgPalette()->Load(backgroundPal);
+	//engine->GetSpPalette()->Load(spritesPal);
+	engine->AddTileset(backgroundTiles, backgroundTilesLen);
 
-	//bg = new FBackground(backgroundMap, 4, 4);
-	sp = new FSprite((u8*)manTiles, 32, 32);
-	sp->Center();
+	bg = new FBackground(backgroundMap, 4, 4);
+	//sp = new FSprite((u8*)manTiles, 32, 32);
+	//sp->Center();
 
-	//AddBackground(2, bg, 0, 0);
-	AddSprite(sp);
+	AddBackground(2, bg, 0, 0);
+	//AddSprite(sp);
 	frame = 0;
 }
 
@@ -109,25 +109,25 @@ void MainScene::Update()
 
 	if (im->Pad.A.Pressed)
 	{
-		if (++frame = 12) frame = 0;
-		sp->SetFrame(frame);
+		//if (++frame = 12) frame = 0;
+		//sp->SetFrame(frame);
 	}
 	else if (im->Pad.B.Pressed)
 	{
-		sp->Hide();
+		//sp->Hide();
 	}
 	else if (im->Pad.Y.Pressed)
 	{
-		sp->Show();
+		//sp->Show();
 	}
 
 	if (im->Stylus.Held)
 	{
-		int angle = (F_GetAngle(128, 96, im->Stylus.X, im->Stylus.Y) * 65534) >> 10;
-		sp->Rotate(angle);
+		//int angle = (F_GetAngle(128, 96, im->Stylus.X, im->Stylus.Y) * 65534) >> 10;
+		//sp->Rotate(angle);
 	}
 
-	DrawGLScene();
+	//DrawGLScene();
 	squareRot += 0.75f;
 	triangRot += 0.9f;
 }
