@@ -20,8 +20,8 @@ int main(void)
 			state = RUNNING;
 			break;
 		case MARIO:
-			flib->GetVideoManager()->GetMainEngine()->SetScene(new MarioScene());
-			flib->GetVideoManager()->GetSubEngine()->SetScene(new MarioSceneSub());
+			flib->GetVideoManager()->GetMainEngine()->SetScene(new MainScene());
+			//flib->GetVideoManager()->GetSubEngine()->SetScene(new MainSceneSub());
 			flib->GetVideoManager()->FadeIn(5);
 			state = RUNNING;
 			break;
