@@ -9,7 +9,7 @@
 //	External tile file: (null).
 //	Total size: 2048 = 2048
 //
-//	Time-stamp: 2009-12-02, 22:49:30
+//	Time-stamp: 2009-12-04, 21:02:19
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.3
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -35,7 +35,7 @@ extern const unsigned short infMap[1024];
 //	External tile file: (null).
 //	Total size: 2048 = 2048
 //
-//	Time-stamp: 2009-12-02, 22:49:30
+//	Time-stamp: 2009-12-04, 21:02:19
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.3
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -61,7 +61,7 @@ extern const unsigned short ufrgsMap[1024];
 //	+ 462 tiles not compressed
 //	Total size: 114 + 29568 = 29682
 //
-//	Time-stamp: 2009-12-02, 22:49:30
+//	Time-stamp: 2009-12-04, 21:02:19
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.3
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -90,7 +90,7 @@ extern const unsigned short introPal[58];
 //	External tile file: (null).
 //	Total size: 4096 = 4096
 //
-//	Time-stamp: 2009-12-02, 22:49:30
+//	Time-stamp: 2009-12-04, 21:02:19
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.3
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -116,7 +116,7 @@ extern const unsigned short mario_bg2Map[2048];
 //	External tile file: (null).
 //	Total size: 4096 = 4096
 //
-//	Time-stamp: 2009-12-02, 22:49:30
+//	Time-stamp: 2009-12-04, 21:02:19
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.3
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -142,7 +142,7 @@ extern const unsigned short mario_bg3Map[2048];
 //	+ 140 tiles not compressed
 //	Total size: 40 + 8960 = 9000
 //
-//	Time-stamp: 2009-12-02, 22:49:30
+//	Time-stamp: 2009-12-04, 21:02:19
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.3
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -168,11 +168,11 @@ extern const unsigned short marioPal[20];
 //	background, 1024x1024@8, 
 //	Transparent color : FF,00,FF
 //	+ palette 256 entries, not compressed
-//	+ 414 tiles (t|f reduced) not compressed
+//	+ 415 tiles (t|f reduced) not compressed
 //	+ regular map (in SBBs), not compressed, 128x128 
-//	Total size: 512 + 26496 + 32768 = 59776
+//	Total size: 512 + 26560 + 32768 = 59840
 //
-//	Time-stamp: 2009-12-02, 22:49:30
+//	Time-stamp: 2009-12-04, 21:02:20
 //	Exported by Cearn's GBA Image Transmogrifier, v0.8.3
 //	( http://www.coranac.com/projects/#grit )
 //
@@ -181,8 +181,8 @@ extern const unsigned short marioPal[20];
 #ifndef GRIT_BACKGROUND_H
 #define GRIT_BACKGROUND_H
 
-#define backgroundTilesLen 26496
-extern const unsigned int backgroundTiles[6624];
+#define backgroundTilesLen 26560
+extern const unsigned int backgroundTiles[6640];
 
 #define backgroundMapLen 32768
 extern const unsigned short backgroundMap[16384];
